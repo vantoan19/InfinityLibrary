@@ -1,0 +1,73 @@
+name: Build, push server image into AWS ECR and deploy server into EKS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  AWS_REGION: eu-central-1
+  SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push the image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+
+        run: |
+          # Build a docker container and push it to ECR 
+          echo "Building server image..."
+          cd server
+          docker image build \
+          --tag ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest \
+          --tag ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ env.SHORT_SHA }} \
+          .
+
+          echo "Pushing image to ECR..."
+          docker push ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
+          docker push ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ env.SHORT_SHA }}
+
+      - name: Install and configure kubectl
+        run: |
+          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+            --progress-bar \
+            --location \
+            --remote-name
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
+
+      - name: Deploy
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}
+          export IMAGE_TAG=${{ env.SHORT_SHA }}
+          export KUBECONFIG=kubeconfig.yaml
+          envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
+          kubectl apply -f kubernetes
