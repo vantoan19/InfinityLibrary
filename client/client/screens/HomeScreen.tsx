@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native"
-import { useLayoutEffect } from "react"
+import React, { useLayoutEffect } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { StyleSheet, Text, View, StatusBar } from "react-native"
+import Layout from "../components/common/Layout/Layout"
 
 export default function HomeScreen() {
   const navigation = useNavigation()
@@ -13,7 +14,9 @@ export default function HomeScreen() {
   useLayoutEffect(() => {})
   return (
     <SafeAreaView>
-      <Text style={styles.text}>HomeScreen</Text>
+      <Layout>
+        <Text style={styles.text}>HomeScreen</Text>
+      </Layout>
     </SafeAreaView>
   )
 }
