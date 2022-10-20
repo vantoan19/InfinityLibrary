@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: vantoan11/infinity-library-server
+          image: ${ ECR_REPOSITORY }:${ IMAGE_TAG }
           ports:
             - containerPort: 80
           env:
