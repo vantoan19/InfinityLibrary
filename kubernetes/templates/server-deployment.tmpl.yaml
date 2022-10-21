@@ -19,15 +19,35 @@ spec:
             - containerPort: 80
           env:
             - name: REDIS_HOST
-              value: redis-cluster-ip-service
+              valueFrom:
+                secretKeyRef:
+                  name: redis-host
+                  key: REDIS_HOST
             - name: REDIS_PORT
-              value: "6379"
-            - name: PGUSER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: redis-port
+                  key: REDIS_PORT
             - name: PGHOST
-              value: postgres-cluster-ip-service
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-host
+                  key: PGHOST
+            - name: PGPORT
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-port
+                  key: PGPORT
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-user
+                  key: PGUSER
             - name: PGDATABASE
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-database
+                  key: PGDATABASE
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:

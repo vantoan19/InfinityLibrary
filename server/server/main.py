@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI(docs_url="/api/v1/docs", openapi_url="/api/v1/openapi.json")
 
 origins = ["*"]
@@ -14,6 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+
+@app.get("/api/v1/")
 def root():
-    return { "message": "Hello World" }
+    return {"message": "Hello World"}
