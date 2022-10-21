@@ -60,8 +60,8 @@ jobs:
             --remote-name
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
-          cat kubeconfig.yaml
+          mkdir ${HOME}/.kube
+          echo ${{ secrets.KUBECONFIG }} | base64 --decode > ${HOME}/.kube/config
 
       - name: Deploy
         env:
@@ -69,7 +69,6 @@ jobs:
         run: |
           export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}
           export IMAGE_TAG=${{ env.SHORT_SHA }}
-          export KUBECONFIG=kubeconfig.yaml
-          cat kubeconfig.yaml
+          export KUBECONFIG=${HOME}/.kube/config
           envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
           kubectl apply -f kubernetes
