@@ -60,6 +60,13 @@ jobs:
           envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
           cat kubernetes/server-deployment.yaml
 
+      - name: Terminate old entities
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        with:
+          args: delete all --all
+
       - name: Deploy
         uses: kodermax/kubectl-aws-eks@master
         env:
