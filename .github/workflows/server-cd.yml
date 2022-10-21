@@ -51,24 +51,24 @@ jobs:
           docker push ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
           docker push ${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ env.SHORT_SHA }}
 
-      - name: Install and configure kubectl
-        run: |
-          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
-            --progress-bar \
-            --location \
-            --remote-name
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
-          mkdir ${HOME}/.kube
-          echo ${{ secrets.KUBECONFIG }} | base64 --decode > ${HOME}/.kube/config
-
-      - name: Deploy
+      - name: Make server deployment yaml from template
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}
           export IMAGE_TAG=${{ env.SHORT_SHA }}
-          export KUBECONFIG=${HOME}/.kube/config
           envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
-          kubectl apply -f kubernetes
+
+      - name: Deploy
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        with:
+          args: apply -f kubernetes
+
+      - name: verify deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout status deployment/server-deployment
