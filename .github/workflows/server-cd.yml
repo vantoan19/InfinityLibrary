@@ -58,6 +58,7 @@ jobs:
           export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}
           export IMAGE_TAG=${{ env.SHORT_SHA }}
           envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
+          cat kubernetes/server-deployment.yaml
 
       - name: Deploy
         uses: kodermax/kubectl-aws-eks@master
