@@ -1,4 +1,4 @@
-name: Build, push server image into AWS ECR and deploy server into EKS
+name: Build, push server image into Docker Hub and deploy server into GKE
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
       - main
 
 env:
-  AWS_REGION: eu-central-1
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
 
 jobs:
@@ -22,11 +21,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - id: "auth"
-        name: Authenticate to Google Cloud
-        uses: "google-github-actions/auth@v0"
-        with:
-          credentials_json: "${{ secrets.SERVICE_ACCOUNT }}"
+      - name: Install Gcloud
+        run: |
+          curl https://sdk.cloud.google.com | bash > /dev/null;
+          source $HOME/google-cloud-sdk/path.bash.inc
+          gcloud components update kubectl
+
+      - name: Authenticate to Google Cloud and set cluster information
+        run: |
+          echo ${{ secrets.SERVICE_ACCOUNT }} | base64 --decode > service-account.json
+          gcloud auth activate-service-account --key-file service-account.json
+          gcloud config set project ${{ secrets.GKE_PROJECT }}
+          gcloud config set compute/zone ${{ secrets.GKE_ZONE }}
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }}
 
       - name: Login to Docker
         run: |
@@ -48,10 +55,8 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ env.SHORT_SHA }}
 
       - name: Make server deployment yaml from template
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}
+          export DOCKER_REPOSITORY=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}
           export IMAGE_TAG=${{ env.SHORT_SHA }}
           envsubst < kubernetes/templates/server-deployment.tmpl.yaml > kubernetes/server-deployment.yaml
           cat kubernetes/server-deployment.yaml
