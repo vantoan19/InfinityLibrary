@@ -1,8 +1,8 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
+import { ScrollView, View, Text, StyleSheet } from "react-native"
 
 export default function Body({ children }: any) {
-  return <View style={styles.container}>{children}</View>
+  return <ScrollView style={styles.container}>{children}</ScrollView>
 }
 
 const styles = StyleSheet.create({

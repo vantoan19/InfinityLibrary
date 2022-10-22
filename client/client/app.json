@@ -1,5 +1,9 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "backgroundColor": "#FFFFFF",
+      "translucent": false
+    },
     "name": "client",
     "slug": "client",
     "version": "1.0.0",
@@ -14,9 +18,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -26,6 +28,7 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     }
