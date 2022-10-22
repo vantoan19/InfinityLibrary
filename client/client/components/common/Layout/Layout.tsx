@@ -1,24 +1,17 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import Body from "./Body"
 import Header from "./Header"
 
 export default function Layout({ children }: any) {
-  return (
-    <View style={styles.container}>
-      <Header />
-      <Body>{children}</Body>
-    </View>
-  )
+  return <View style={styles.container}>{children}</View>
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    flexDirection: "column",
+    flex: 1,
     alignItems: "center",
-    width: "100%",
-    minHeight: "100%",
+    backgroundColor: "white",
     borderWidth: 5,
     borderColor: "red",
   },
