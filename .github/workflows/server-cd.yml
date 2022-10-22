@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - IL-25-Migrate-to-Google-Cloud
   pull_request:
     branches:
       - main
