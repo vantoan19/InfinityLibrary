@@ -1,14 +1,18 @@
 import * as React from "react"
-import { Text, View } from "react-native"
+import { Button, Text, View } from "react-native"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import HomeScreen from "./screens/HomeScreen"
 import { useLayoutEffect } from "react"
 
-function SettingsScreen() {
+function SettingsScreen({ navigation }: any) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Settings!</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
+      />
     </View>
   )
 }
@@ -23,7 +27,21 @@ export default function Tabs() {
     })
   })
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 20,
+          left: "30%",
+          borderRadius: 50,
+          display: "flex",
+          width: "40%",
+        },
+        tabBarLabel: () => {
+          return null
+        },
+      }}
+    >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
