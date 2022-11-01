@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HomeScreen from "./screens/HomeScreen"
 import Tabs from "./Tabs"
+import { ScrollBottomNavProvider } from "./context/ScrollBottomNavContext"
 
 function Details() {
   return (
@@ -18,10 +19,12 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Tabs" component={Tabs} />
-        <Stack.Screen name="Details" component={Details} />
-      </Stack.Navigator>
+      <ScrollBottomNavProvider>
+        <Stack.Navigator>
+          <Stack.Screen name="Tabs" component={Tabs} />
+          <Stack.Screen name="Details" component={Details} />
+        </Stack.Navigator>
+      </ScrollBottomNavProvider>
     </NavigationContainer>
   )
 }

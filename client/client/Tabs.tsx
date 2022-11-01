@@ -4,6 +4,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import HomeScreen from "./screens/HomeScreen"
 import { useLayoutEffect } from "react"
+import { MotiView, AnimatePresence } from "moti"
 
 import ChatBubbleSVG from "./assets/svg/chat-bubble.svg"
 
@@ -12,6 +13,7 @@ import {
   PlusCircleIcon,
   UserIcon,
 } from "react-native-heroicons/solid"
+import { useScrollBottomNavContext } from "./context/ScrollBottomNavContext"
 
 function SettingsScreen({ navigation }: any) {
   return (
@@ -29,6 +31,7 @@ const Tab = createBottomTabNavigator()
 
 export default function Tabs() {
   const navigation = useNavigation()
+  const { scrollHide } = useScrollBottomNavContext()
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -39,7 +42,7 @@ export default function Tabs() {
       screenOptions={{
         tabBarStyle: {
           position: "absolute",
-          bottom: 20,
+          bottom: (scrollHide ? -5 : 1) * 20,
           left: "30%",
           borderRadius: 50,
           display: "flex",
