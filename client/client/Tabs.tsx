@@ -5,6 +5,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import HomeScreen from "./screens/HomeScreen"
 import { useLayoutEffect } from "react"
 
+import ChatBubbleSVG from "./assets/svg/chat-bubble.svg"
+
+import {
+  HomeIcon,
+  PlusCircleIcon,
+  UserIcon,
+} from "react-native-heroicons/solid"
+
 function SettingsScreen({ navigation }: any) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -42,8 +50,39 @@ export default function Tabs() {
         },
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <HomeIcon size={20} color={color} />
+          ),
+          tabBarActiveTintColor: "#F87C43",
+          tabBarInactiveTintColor: "#ACA9A9",
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <PlusCircleIcon size={20} color={color} />
+          ),
+          tabBarActiveTintColor: "#F87C43",
+          tabBarInactiveTintColor: "#ACA9A9",
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <UserIcon size={20} color={color} />
+          ),
+          tabBarActiveTintColor: "#F87C43",
+          tabBarInactiveTintColor: "#ACA9A9",
+        }}
+      />
     </Tab.Navigator>
   )
 }
