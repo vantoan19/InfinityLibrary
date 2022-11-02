@@ -42,7 +42,7 @@ export default function Tabs() {
       screenOptions={{
         tabBarStyle: {
           position: "absolute",
-          bottom: (scrollHide ? -5 : 1) * 20,
+          bottom: 20,
           left: "30%",
           borderRadius: 50,
           display: "flex",
