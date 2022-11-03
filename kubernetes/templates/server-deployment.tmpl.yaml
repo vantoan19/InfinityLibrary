@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: ${ECR_REPOSITORY}:${IMAGE_TAG}
+          image: ${DOCKER_REPOSITORY}:${IMAGE_TAG}
           ports:
             - containerPort: 80
           env:
