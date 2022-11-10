@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     width: "90%",
-    borderWidth: 5,
-    borderColor: "blue",
+    // borderWidth: 5,
+    // borderColor: "blue",
   },
 })

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "white",
-    borderWidth: 5,
-    borderColor: "red",
+    // borderWidth: 5,
+    // borderColor: "red",
   },
 })

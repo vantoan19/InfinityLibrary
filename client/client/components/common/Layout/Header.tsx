@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "90%",
-    borderWidth: 5,
-    borderColor: "green",
+    paddingVertical: 12,
+    // borderWidth: 5,
+    // borderColor: "green",
   },
   innerCont: {
     display: "flex",

@@ -6,6 +6,9 @@ import Layout from "../components/common/Layout/Layout"
 import Header from "../components/common/Layout/Header"
 import Body from "../components/common/Layout/Body"
 import { MotiView, AnimatePresence } from "moti"
+import Card from "../components/common/Card/Card"
+
+const gap = 20
 
 export default function HomeScreen(props: any) {
   console.log("Home props", props)
@@ -20,157 +23,17 @@ export default function HomeScreen(props: any) {
     <Layout>
       <Header />
       <Body navigation={props.navigation}>
+        <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+          <Card gap={gap}></Card>
+        </View>
         <Text style={styles.text}>HomeScreen</Text>
-
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
-        <Text> Main Content Here</Text>
       </Body>
     </Layout>
   )
@@ -179,5 +42,12 @@ export default function HomeScreen(props: any) {
 const styles = StyleSheet.create({
   text: {
     color: "red",
+  },
+
+  cardsCont: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: 10,
   },
 })
