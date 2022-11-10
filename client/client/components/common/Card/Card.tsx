@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     resizeMode: "contain",
+    marginBottom: 10,
   },
 
   contentCont: {
@@ -59,14 +60,15 @@ const styles = StyleSheet.create({
   },
 
   avatar: {
-    width: 20,
-    height: 20,
+    width: 22,
+    height: 22,
     marginRight: 5,
   },
 
   userCont: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
 
   userInfoCont: {
@@ -74,20 +76,20 @@ const styles = StyleSheet.create({
   },
 
   usernameText: {
-    fontSize: 8,
+    fontSize: 10,
     fontWeight: "500",
     color: "#1D1D1D",
   },
 
   postedText: {
     fontWeight: "400",
-    fontSize: 6,
+    fontSize: 8,
     color: "#AAA8A8",
   },
 
   priceText: {
     fontWeight: "600",
-    fontSize: 19,
+    fontSize: 21,
     color: "#F87C43",
   },
 
