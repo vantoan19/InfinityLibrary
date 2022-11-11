@@ -6,11 +6,11 @@ authors = ["Toan Tran <thetopoftheworld19@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
 fastapi = "^0.85.1"
 uvicorn = "^0.18.3"
 gunicorn = "^20.1.0"
 alembic = "^1.8.1"
+psycopg2 = "^2.9.5"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from datetime import datetime
+
+from pydantic import BaseModel, Field
 from server.core.models import UserType
 
 from .address import Address, AddressCreate, AddressUpdate
@@ -12,8 +14,6 @@ class UserBase(BaseModel):
     first_name: str | None = None
     last_name: str | None = None
     profile_img_url: str | None = None
-    created_at: str | None = None
-    modified_at: str | None = None
 
 
 class UserCreate(UserBase):
@@ -30,8 +30,10 @@ class UserUpdate(UserBase):
 
 
 class User(UserBase):
-    user_id: int
-    address: Address
+    id: int = Field(alias="user_id")
+    address: list[Address]
+    created_at: datetime
+    modified_at: datetime | None
 
     class Config:
         orm_mode = True

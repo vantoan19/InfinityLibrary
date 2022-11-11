@@ -22,7 +22,18 @@ class AddressUpdate(AddressBase):
 
 
 class Address(BaseModel):
-    pass
+    street_line_1: str | None
+    street_line_2: str | None
+    postal_code: str | None
+    district: str | None
+    city: str | None
+    region: str | None
+    country: str | None
+    longitude: str | None
+    latitude: str | None
+
+    class Config:
+        orm_mode = True
 
 
 class AddressWithId(BaseModel):

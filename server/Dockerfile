@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.10-alpine
 
 ENV PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
@@ -8,7 +8,7 @@ ENV PYTHONFAULTHANDLER=1 \
   PIP_DEFAULT_TIMEOUT=100 \
   POETRY_VERSION=1.2.0
 
-RUN apk add --no-cache gcc libffi-dev musl-dev python3-dev mariadb-connector-c-dev
+RUN apk add --no-cache gcc libffi-dev musl-dev python3-dev postgresql-dev
 RUN pip install "poetry==$POETRY_VERSION"
 
 WORKDIR /code

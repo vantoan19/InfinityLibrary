@@ -15,11 +15,11 @@ config = context.config
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
 PGUSER = os.environ.get("PGUSER")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES+_PASSWORD")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 PGDATABASE = os.environ.get("PGDATABASE")
 PGHOST = os.environ.get("PGHOST")
 
-DATABASE_URL = f"postgresql://{PGUSER}:{PGDATABSE}@{PGHOST}/{PGDATABASE}"
+DATABASE_URL = f"postgresql://{PGUSER}:{POSTGRES_PASSWORD}@{PGHOST}/{PGDATABASE}"
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Interpret the config file for Python logging.

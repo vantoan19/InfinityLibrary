@@ -12,7 +12,7 @@ PGDATABASE = os.environ.get("PGDATABASE")
 PGHOST = os.environ.get("PGHOST")
 
 SQLALCHEMY_DATABASE_URL = (
-    f"postgres://{PGUSER}:{POSTGRES_PASSWORD}@{PGHOST}/{PGDATABASE}"
+    f"postgresql://{PGUSER}:{POSTGRES_PASSWORD}@{PGHOST}/{PGDATABASE}"
 )
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={})
