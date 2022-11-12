@@ -30,7 +30,6 @@ jobs:
           cd server
           docker image build \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest \
-          --tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ env.SHORT_SHA }} \
           .
           echo "Server docker image built successfully"
 
