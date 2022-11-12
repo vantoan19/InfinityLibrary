@@ -7,7 +7,7 @@ Create Date: 2022-11-04 13:33:19.661778
 """
 import sqlalchemy as sa
 from alembic import op
-from server.core.models import UserType, VoteType
+from server.core.models import UserType
 from sqlalchemy.sql import func
 
 # revision identifiers, used by Alembic.
