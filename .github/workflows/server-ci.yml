@@ -20,8 +20,10 @@ jobs:
 
       - name: Analysing the code with flake8
         run: |
+          echo "Analyzing the code with flake8"
           cd server
           flake8 $(git ls-files '*.py')
+          echo "Analyzed successfully with flake8!"
 
       - name: Build server docker image
         id: build-image

@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG, format="%(process)d-%(levelname)s-%(mes
 class CRUDUser(CRUDBase[models.User, schemas.UserCreate, schemas.AddressUpdate]):
     def create(self, db: Session, *, user_info: schemas.UserCreate) -> models.User:
 
-        logging.info(f"CRUDUser: Start creating user with user_info\={user_info}")
+        logging.info(f"CRUDUser: Start creating user with user_info={user_info}")
         user_info_data = jsonable_encoder(user_info)
 
         address = models.Address(**user_info_data["address"])
@@ -28,12 +28,12 @@ class CRUDUser(CRUDBase[models.User, schemas.UserCreate, schemas.AddressUpdate])
             db.refresh(user)
 
             logging.info(
-                f"CRUDUser: End creating user with user_info\={user_info}: Successful"
+                f"CRUDUser: End creating user with user_info={user_info}: Successful"
             )
             return user
         except SQLAlchemyError:
             logging.error(
-                f"CRUDUser: End creating with schema\={user_info}: Error",
+                f"CRUDUser: End creating with schema={user_info}: Error",
                 exc_info=True,
             )
             db.rollback()

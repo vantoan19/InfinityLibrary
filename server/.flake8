@@ -4,7 +4,7 @@
 # D203  One blank line required before class docstring
 # H306  imports not in alphabetical order
 # W291 trailing whitespace
-ignore = H903, E266, D203, H306, W291, F401, W605
+ignore = H903, E266, D203, H306, W291, F401
 exclude = .git,
 max-complexity = 10
 max_line_length = 120
