@@ -5,14 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HomeScreen from "./screens/HomeScreen"
 import Tabs from "./Tabs"
 import { ScrollBottomNavProvider } from "./context/ScrollBottomNavContext"
-
-function Details() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>yoo!</Text>
-    </View>
-  )
-}
+import DetailsScreen from "./screens/DetailsScreen"
 
 const Stack = createNativeStackNavigator()
 
@@ -22,7 +15,7 @@ export default function App() {
       <ScrollBottomNavProvider>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={Tabs} />
-          <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
       </ScrollBottomNavProvider>
     </NavigationContainer>

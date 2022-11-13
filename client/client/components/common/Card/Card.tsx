@@ -1,10 +1,27 @@
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import placeholder from "../../../assets/placeholder.png"
 import temp from "../../../assets/icon.png"
+import { useNavigation } from "@react-navigation/native"
+import { Book } from "../../../types/Book"
 
 export default function Card({ gap }: any) {
+  const navigation = useNavigation()
+
+  const navigatingToDetailsPage = () => {
+    const payloadObj: Book = {
+      title: "Book1",
+      image_covers: [placeholder as string],
+      price: 20,
+      price_currency: "$",
+    }
+    navigation.navigate("Details" as never, payloadObj as never)
+  }
+
   return (
-    <View style={[styles.container, { marginVertical: gap / 2 }]}>
+    <Pressable
+      onPress={navigatingToDetailsPage}
+      style={[styles.container, { marginVertical: gap / 2 }]}
+    >
       <Image style={styles.imgCont} source={placeholder}></Image>
 
       <View style={styles.contentCont}>
@@ -23,7 +40,7 @@ export default function Card({ gap }: any) {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 
