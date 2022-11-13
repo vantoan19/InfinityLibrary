@@ -7,6 +7,7 @@ import Header from "../components/common/Layout/Header"
 import Body from "../components/common/Layout/Body"
 import { MotiView, AnimatePresence } from "moti"
 import Card from "../components/common/Card/Card"
+import Mock_BookData from "../mocks/Books/Books"
 
 const gap = 20
 
@@ -24,14 +25,9 @@ export default function HomeScreen(props: any) {
       <Header />
       <Body navigation={props.navigation}>
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
-          <Card gap={gap}></Card>
+          {Mock_BookData.map((e, ind) => (
+            <Card key={ind} bookData={e} gap={gap}></Card>
+          ))}
         </View>
         <Text style={styles.text}>HomeScreen</Text>
       </Body>

@@ -4,16 +4,16 @@ import temp from "../../../assets/icon.png"
 import { useNavigation } from "@react-navigation/native"
 import { Book } from "../../../types/Book"
 
-export default function Card({ gap }: any) {
+type Props = {
+  gap: any
+  bookData: Book
+}
+
+export default function Card({ gap, bookData }: Props) {
   const navigation = useNavigation()
 
   const navigatingToDetailsPage = () => {
-    const payloadObj: Book = {
-      title: "Book1",
-      image_covers: [placeholder as string],
-      price: 20,
-      price_currency: "$",
-    }
+    const payloadObj: Book = bookData
     navigation.navigate("Details" as never, payloadObj as never)
   }
 
@@ -22,10 +22,10 @@ export default function Card({ gap }: any) {
       onPress={navigatingToDetailsPage}
       style={[styles.container, { marginVertical: gap / 2 }]}
     >
-      <Image style={styles.imgCont} source={placeholder}></Image>
+      <Image style={styles.imgCont} source={bookData.image_covers[0]}></Image>
 
       <View style={styles.contentCont}>
-        <Text style={styles.contentTitle}>Milk and Honey</Text>
+        <Text style={styles.contentTitle}>{bookData.title}</Text>
         <View style={styles.innerContentCont}>
           <View style={styles.userCont}>
             <Image style={styles.avatar} source={temp}></Image>
@@ -35,8 +35,8 @@ export default function Card({ gap }: any) {
             </View>
           </View>
           <View style={styles.priceCont}>
-            <Text style={styles.priceText}>32</Text>
-            <Text style={styles.priceCur}>$</Text>
+            <Text style={styles.priceText}>{bookData.price}</Text>
+            <Text style={styles.priceCur}>{bookData.price_currency}</Text>
           </View>
         </View>
       </View>
@@ -52,7 +52,11 @@ const styles = StyleSheet.create({
   imgCont: {
     display: "flex",
     width: "100%",
-    resizeMode: "contain",
+    height: 190,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 5,
     marginBottom: 10,
   },
 
