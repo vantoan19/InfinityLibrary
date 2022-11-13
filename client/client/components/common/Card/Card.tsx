@@ -1,14 +1,31 @@
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import placeholder from "../../../assets/placeholder.png"
 import temp from "../../../assets/icon.png"
+import { useNavigation } from "@react-navigation/native"
+import { Book } from "../../../types/Book"
 
-export default function Card({ gap }: any) {
+type Props = {
+  gap: any
+  bookData: Book
+}
+
+export default function Card({ gap, bookData }: Props) {
+  const navigation = useNavigation()
+
+  const navigatingToDetailsPage = () => {
+    const payloadObj: Book = bookData
+    navigation.navigate("Details" as never, payloadObj as never)
+  }
+
   return (
-    <View style={[styles.container, { marginVertical: gap / 2 }]}>
-      <Image style={styles.imgCont} source={placeholder}></Image>
+    <Pressable
+      onPress={navigatingToDetailsPage}
+      style={[styles.container, { marginVertical: gap / 2 }]}
+    >
+      <Image style={styles.imgCont} source={bookData.image_covers[0]}></Image>
 
       <View style={styles.contentCont}>
-        <Text style={styles.contentTitle}>Milk and Honey</Text>
+        <Text style={styles.contentTitle}>{bookData.title}</Text>
         <View style={styles.innerContentCont}>
           <View style={styles.userCont}>
             <Image style={styles.avatar} source={temp}></Image>
@@ -18,12 +35,12 @@ export default function Card({ gap }: any) {
             </View>
           </View>
           <View style={styles.priceCont}>
-            <Text style={styles.priceText}>32</Text>
-            <Text style={styles.priceCur}>$</Text>
+            <Text style={styles.priceText}>{bookData.price}</Text>
+            <Text style={styles.priceCur}>{bookData.price_currency}</Text>
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 
@@ -35,7 +52,12 @@ const styles = StyleSheet.create({
   imgCont: {
     display: "flex",
     width: "100%",
-    resizeMode: "contain",
+    height: 190,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 5,
+    marginBottom: 10,
   },
 
   contentCont: {
@@ -59,14 +81,15 @@ const styles = StyleSheet.create({
   },
 
   avatar: {
-    width: 20,
-    height: 20,
+    width: 22,
+    height: 22,
     marginRight: 5,
   },
 
   userCont: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
 
   userInfoCont: {
@@ -74,20 +97,20 @@ const styles = StyleSheet.create({
   },
 
   usernameText: {
-    fontSize: 8,
+    fontSize: 10,
     fontWeight: "500",
     color: "#1D1D1D",
   },
 
   postedText: {
     fontWeight: "400",
-    fontSize: 6,
+    fontSize: 8,
     color: "#AAA8A8",
   },
 
   priceText: {
     fontWeight: "600",
-    fontSize: 19,
+    fontSize: 21,
     color: "#F87C43",
   },
 
