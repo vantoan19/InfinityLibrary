@@ -26,16 +26,16 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     def get(self, db: Session, id: Any) -> Optional[ModelType]:
-        logging.info(f"{type(self).__name__}: Start query with id\={id}")
+        logging.info(f"{type(self).__name__}: Start query with id={id}")
 
         try:
             obj = db.query(self.model).filter(self.model.id == id).first()
 
-            logging.info(f"{type(self).__name__}: End query with id\={id}: Successful")
+            logging.info(f"{type(self).__name__}: End query with id={id}: Successful")
             return obj
         except SQLAlchemyError:
             logging.error(
-                f"{type(self).__name__}: End query with id\={id}: Error", exc_info=True
+                f"{type(self).__name__}: End query with id={id}: Error", exc_info=True
             )
             raise HTTPException(
                 status_code=500,
@@ -62,7 +62,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             )
 
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
-        logging.info(f"{type(self).__name__}: Start creating with schema\={obj_in}")
+        logging.info(f"{type(self).__name__}: Start creating with schema={obj_in}")
 
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data)  # type: ignore
@@ -72,12 +72,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db.refresh(db_obj)
 
             logging.info(
-                f"{type(self).__name__}: End creating with schema\={obj_in}: Successful"
+                f"{type(self).__name__}: End creating with schema{obj_in}: Successful"
             )
             return db_obj
         except SQLAlchemyError:
             logging.error(
-                f"{type(self).__name__}: End creating with schema\={obj_in}: Error",
+                f"{type(self).__name__}: End creating with schema={obj_in}: Error",
                 exc_info=True,
             )
             db.rollback()
@@ -93,7 +93,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         db_obj: ModelType,
         obj_in: UpdateSchemaType | Dict[str, Any],
     ) -> ModelType:
-        logging.info(f"{type(self).__name__}: Start updating with schema\={obj_in}")
+        logging.info(f"{type(self).__name__}: Start updating with schema={obj_in}")
         obj_data = jsonable_encoder(db_obj)
         if isinstance(obj_in, dict):
             update_data = obj_in
@@ -111,12 +111,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db.refresh(db_obj)
 
             logging.info(
-                f"{type(self).__name__}: End updating with schema\={obj_in}: Successful"
+                f"{type(self).__name__}: End updating with schema={obj_in}: Successful"
             )
             return db_obj
         except SQLAlchemyError:
             logging.error(
-                f"{type(self).__name__}: End updating with schema\={obj_in}: Error",
+                f"{type(self).__name__}: End updating with schema={obj_in}: Error",
                 exc_info=True,
             )
             raise HTTPException(
@@ -125,10 +125,10 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             )
 
     def remove(self, db: Session, *, id: int) -> ModelType:
-        logging.info(f"{type(self).__name__}: Start removing id\={id}")
+        logging.info(f"{type(self).__name__}: Start removing id={id}")
         obj = db.query(self.model).get(id)
         if not obj:
-            logging.error(f"{type(self).__name__}: End removing id\={id}: Not exist")
+            logging.error(f"{type(self).__name__}: End removing id={id}: Not exist")
             raise HTTPException(
                 status_code=404,
                 detail=f"{type(self).__name__}: Question does not exist",
@@ -137,11 +137,11 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db.delete(obj)
             db.commit()
 
-            logging.info(f"{type(self).__name__}: End removing id\={id}: Successful")
+            logging.info(f"{type(self).__name__}: End removing id={id}: Successful")
             return obj
         except SQLAlchemyError:
             logging.error(
-                f"{type(self).__name__}: End removing id\={id}: Error", exc_info=True
+                f"{type(self).__name__}: End removing id={id}: Error", exc_info=True
             )
             raise HTTPException(
                 status_code=500,

@@ -1,0 +1,7 @@
+[run]
+omit =
+    server/api/dependencies.py 
+    server/migrations/*
+    server/main.py
+    */__init__.py
+    server/core/*
