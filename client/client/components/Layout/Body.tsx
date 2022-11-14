@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { ScrollView, View, Text, StyleSheet } from "react-native"
-import { useScrollBottomNavContext } from "../../../context/ScrollBottomNavContext"
+import { useScrollBottomNavContext } from "../../context/ScrollBottomNavContext"
 
 export default function Body({ children, navigation }: any) {
   const [offset, setOffset] = useState(0)

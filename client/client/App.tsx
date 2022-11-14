@@ -2,10 +2,10 @@ import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text, View } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import HomeScreen from "./screens/HomeScreen"
+import HomeScreen from "./screens/HomeScreen/HomeScreen"
 import Tabs from "./Tabs"
 import { ScrollBottomNavProvider } from "./context/ScrollBottomNavContext"
-import DetailsScreen from "./screens/DetailsScreen"
+import DetailsScreen from "./screens/DetailsScreen/DetailsScreen"
 
 const Stack = createNativeStackNavigator()
 

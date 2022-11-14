@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import placeholder from "../../../assets/placeholder.png"
-import temp from "../../../assets/icon.png"
+import temp from "../../assets/icon.png"
 import { useNavigation } from "@react-navigation/native"
-import { Book } from "../../../types/Book"
+import { Book } from "../../types/Book"
 
 type Props = {
   gap: any

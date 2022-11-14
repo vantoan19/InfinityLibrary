@@ -2,12 +2,12 @@ import { useNavigation } from "@react-navigation/native"
 import React, { useLayoutEffect } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { StyleSheet, Text, View, StatusBar } from "react-native"
-import Layout from "../components/common/Layout/Layout"
-import Header from "../components/common/Layout/Header"
-import Body from "../components/common/Layout/Body"
+import Layout from "../../components/Layout/Layout"
+import Header from "../../components/Layout/Header"
+import Body from "../../components/Layout/Body"
 import { MotiView, AnimatePresence } from "moti"
-import Card from "../components/common/Card/Card"
-import Mock_BookData from "../mocks/Books/Books"
+import Card from "../../components/Card/Card"
+import Mock_BookData from "../../mocks/Books/Books"
 
 const gap = 20
 
