@@ -12,6 +12,7 @@ import { Book } from "../../types/Book"
 import SendSVG from "../assets/svg/send.svg"
 import FixedContact from "./FixedContact"
 import GeneralInfos from "./GeneralInfos"
+import SellerInformation from "./SellerInfomation"
 export default function DetailsScreen({ navigation, route }: any) {
   const bookDetails: Book = route.params
 
@@ -32,8 +33,22 @@ export default function DetailsScreen({ navigation, route }: any) {
           <Text style={styles.titleTxt}>{bookDetails.title}</Text>
           <Text style={styles.postedTxt}>Posted 2 hours ago</Text>
           <GeneralInfos />
+          <Text style={styles.descriptionTxt}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+            rerum repudiandae veniam placeat perferendis facilis numquam
+            laudantium cumque praesentium. Sunt aut deserunt soluta ipsam!
+            Exercitationem eos quos quaerat qui deserunt?{"\n"}
+            {"\n"}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+            rerum repudiandae veniam placeat perferendis facilis numquam
+            laudantium cumque praesentium. Sunt aut deserunt soluta ipsam!
+            Exercitationem eos quos quaerat qui deserunt?
+          </Text>
+          <SellerInformation />
           <Text>{JSON.stringify(bookDetails)}</Text>
         </View>
+
+        <View style={styles.spacer}></View>
       </ScrollView>
       <FixedContact
         price={bookDetails.price}
@@ -58,10 +73,17 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 38,
     color: "#1D1D1D",
+    marginTop: 10,
   },
   postedTxt: {
     color: "#BAB9B9",
     fontWeight: "600",
     fontSize: 9,
+  },
+  descriptionTxt: {
+    fontSize: 15,
+  },
+  spacer: {
+    height: 150,
   },
 })
