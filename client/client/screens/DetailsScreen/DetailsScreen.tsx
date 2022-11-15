@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { useEffect, useLayoutEffect } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import {
   StyleSheet,
   Text,
@@ -8,13 +8,17 @@ import {
   ScrollView,
   Pressable,
 } from "react-native"
-import { Book } from "../../types/Book"
-import SendSVG from "../assets/svg/send.svg"
+import { Book, BookDetails } from "../../types/Book"
 import FixedContact from "./FixedContact"
 import GeneralInfos from "./GeneralInfos"
 import SellerInformation from "./SellerInfomation"
+import { MockDetailsBook } from "../../mocks/Books/Books"
+import { MockUser } from "../../mocks/Books/Users"
+import { User } from "../../types/User"
 export default function DetailsScreen({ navigation, route }: any) {
-  const bookDetails: Book = route.params
+  const bookID: number = route.params
+
+  const [bookDetails, setBookDetails] = useState<BookDetails>({} as BookDetails)
 
   const nav = useNavigation()
   useLayoutEffect(() => {
@@ -25,18 +29,38 @@ export default function DetailsScreen({ navigation, route }: any) {
 
   //TODO: For fetching data base on bookDetails.
   useEffect(() => {
-    console.log("DetailsScreen render")
+    const fetchBook = async () => {
+      // const req = await fetch('../')
+      // const res = await req.json()
+
+      const res = MockDetailsBook(bookID) as BookDetails
+      const userID = res.user_id
+      const user = MockUser(userID)
+
+      const finalObj = { ...res, user }
+
+      setBookDetails(finalObj)
+    }
+    fetchBook()
   }, [])
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      // const req = await fetch('../')
+      // const res = await req.json()
+    }
+    fetchUser()
+  }, [bookDetails])
 
   return (
     <>
       <ScrollView style={{ flexDirection: "column", backgroundColor: "white" }}>
         <Image
           style={styles.image}
-          source={bookDetails.image_covers[0]}
+          source={bookDetails?.image_covers?.[0]}
         ></Image>
         <View style={styles.main}>
-          <Text style={styles.titleTxt}>{bookDetails.title}</Text>
+          <Text style={styles.titleTxt}>{bookDetails?.title}</Text>
           <Text style={styles.postedTxt}>Posted 2 hours ago</Text>
           <GeneralInfos />
           <Text style={styles.descriptionTxt}>
@@ -50,15 +74,15 @@ export default function DetailsScreen({ navigation, route }: any) {
             laudantium cumque praesentium. Sunt aut deserunt soluta ipsam!
             Exercitationem eos quos quaerat qui deserunt?
           </Text>
-          <SellerInformation />
-          <Text>{JSON.stringify(bookDetails)}</Text>
+          <SellerInformation user={bookDetails.user as any} />
+          {/* <Text>{JSON.stringify(bookDetails)}</Text> */}
         </View>
 
         <View style={styles.spacer}></View>
       </ScrollView>
       <FixedContact
-        price={bookDetails.price}
-        priceCurrency={bookDetails.price_currency}
+        price={bookDetails?.price}
+        priceCurrency={bookDetails?.price_currency}
       />
     </>
   )
@@ -90,6 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   spacer: {
-    height: 150,
+    height: 120,
   },
 })

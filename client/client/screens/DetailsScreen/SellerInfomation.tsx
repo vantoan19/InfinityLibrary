@@ -12,8 +12,11 @@ import temp from "../../assets/icon.png"
 import { InformationCircleIcon } from "react-native-heroicons/outline"
 import LocationSVG from "../../assets/svg/location.svg"
 import MockVoteSVG from "../../assets/votes.svg"
+import { User } from "../../types/User"
 
-export default function SellerInformation() {
+type Props = { user: User }
+
+export default function SellerInformation({ user }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.titleCont}>
@@ -28,12 +31,12 @@ export default function SellerInformation() {
         }}
       >
         <View style={{ flexDirection: "row" }}>
-          <Image style={styles.avatar} source={temp} />
+          <Image style={styles.avatar} source={user?.avatar} />
           <View style={styles.contentCont}>
-            <Text style={styles.username}>username1</Text>
+            <Text style={styles.username}>{user?.username}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <LocationSVG color={"#1D1D1D"} width={12} height={12} />
-              <Text style={styles.location}>Budapest, Hungary</Text>
+              <Text style={styles.location}>{user?.location}</Text>
             </View>
           </View>
         </View>
