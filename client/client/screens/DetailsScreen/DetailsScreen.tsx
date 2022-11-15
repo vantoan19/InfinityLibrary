@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { useLayoutEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import {
   StyleSheet,
   Text,
@@ -22,6 +22,12 @@ export default function DetailsScreen({ navigation, route }: any) {
       headerShown: false,
     })
   })
+
+  //TODO: For fetching data base on bookDetails.
+  useEffect(() => {
+    console.log("DetailsScreen render")
+  }, [])
+
   return (
     <>
       <ScrollView style={{ flexDirection: "column", backgroundColor: "white" }}>
