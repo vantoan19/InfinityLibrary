@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from server.core import schemas
 from server.api import get_db
 from sqlalchemy.orm import Session
@@ -23,7 +23,7 @@ async def get_book_by_id(*, db: Session = Depends(get_db), book_id: int):
     return book
 
 
-@router.post("/", response_model=schemas.Book)
+@router.post("/", response_model=schemas.Book, status_code=status.HTTP_201_CREATED)
 async def create_book(*, db: Session = Depends(get_db), new_book: schemas.BookCreate):
     book = book_crud.create(db=db, book_info=new_book)
     return book

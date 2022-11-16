@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from enum import Enum
 from typing import List
 from server.core.models import BookStatus
+from .user import User
 
 
 class BookBase(BaseModel):
@@ -28,10 +29,13 @@ class BookSort(str, Enum):
 
 class Book(BookBase):
     id: int
-    owner: int
+    user_id: int
     title: str
     description: str
     published_year: int
+    user: User
+    book_condition: str = "Newly open"
+    view: int = 0
 
     class Config:
         orm_mode = True
@@ -46,7 +50,7 @@ class BookCreate(BookBase):
     pages: int
     status: BookStatus = BookStatus.AVAILABLE
     book_category: List[str]
-    owner: int
+    user_id: int
 
 
 class BookUpdate(BookBase):
