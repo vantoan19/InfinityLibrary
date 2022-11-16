@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG, format="%(process)d-%(levelname)s-%(mes
 
 
 class CRUDBook(CRUDBase[models.Book, schemas.BookCreate, schemas.AddressUpdate]):
-   def create(self, db: Session, *, book_info: schemas.BookCreate) -> models.Book:
+    def create(self, db: Session, *, book_info: schemas.BookCreate) -> models.Book:
 
         logging.info(f"CRUDBook: Start creating book with book_info={book_info}")
         book_data = jsonable_encoder(book_info)
@@ -40,6 +40,8 @@ class CRUDBook(CRUDBase[models.Book, schemas.BookCreate, schemas.AddressUpdate])
                 status_code=500,
                 detail=f"{type(self).__name__}: Error when creating Book",
             )
-   pass
+
+    pass
+
 
 book_crud = CRUDBook(models.Book)

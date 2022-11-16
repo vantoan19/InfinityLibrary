@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pydantic import BaseModel
 from enum import Enum
 from typing import List
-from  server.core.models import BookStatus
+from server.core.models import BookStatus
 
 
 class BookBase(BaseModel):
@@ -16,6 +16,7 @@ class BookBase(BaseModel):
 
     status: BookStatus
 
+
 class BookSort(str, Enum):
     default = "default"
     price_asc = "price,asc"
@@ -24,28 +25,29 @@ class BookSort(str, Enum):
     timestamp_desc = "time,desc"
     votes = "votes"
 
+
 class Book(BookBase):
     id: int
     owner: int
     title: str
-    description: str 
-    published_year: int 
+    description: str
+    published_year: int
 
     class Config:
         orm_mode = True
         allow_population_by_field_name = True
 
+
 class BookCreate(BookBase):
     title: str
-    price: int 
+    price: int
     author: str = "Unknown"
-    published_year: int 
-    pages: int 
+    published_year: int
+    pages: int
     status: BookStatus = BookStatus.AVAILABLE
-    book_category : List[str]
+    book_category: List[str]
     owner: int
+
 
 class BookUpdate(BookBase):
     pass
-
-
