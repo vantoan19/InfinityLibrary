@@ -13,7 +13,7 @@ import FixedContact from "./FixedContact"
 import GeneralInfos from "./GeneralInfos"
 import SellerInformation from "./SellerInfomation"
 import { MockDetailsBook } from "../../mocks/Books/Books"
-import { MockUser } from "../../mocks/Books/Users"
+import { MockUser } from "../../mocks/Users/Users"
 import { User } from "../../types/User"
 export default function DetailsScreen({ navigation, route }: any) {
   const bookID: number = route.params

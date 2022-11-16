@@ -3,7 +3,7 @@ import placeholder from "../../../assets/placeholder.png"
 import temp from "../../assets/icon.png"
 import { useNavigation } from "@react-navigation/native"
 import { Book } from "../../types/Book"
-import { MockUser } from "../../mocks/Books/Users"
+import { MockUser } from "../../mocks/Users/Users"
 import { useEffect, useState } from "react"
 
 type Props = {
