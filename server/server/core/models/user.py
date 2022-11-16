@@ -26,3 +26,4 @@ class User(Base):
     modified_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     address = relationship("Address")
+    books = relationship("Book", back_populates="user")
