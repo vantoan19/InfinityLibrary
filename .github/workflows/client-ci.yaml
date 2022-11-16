@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: 18.x
           cache: npm
+          cache-dependency-path: client/package-lock.json
 
       - name: Setup Expo and EAS
         uses: expo/expo-github-action@v7
