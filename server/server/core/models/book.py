@@ -41,7 +41,7 @@ class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True)
-    owner = Column(Integer, ForeignKey("users.id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
     title = Column(String, nullable=False)
     description = Column(String)
     published_year = Column(Integer, nullable=False)
