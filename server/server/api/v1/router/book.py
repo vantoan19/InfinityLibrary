@@ -8,14 +8,14 @@ from typing import List
 
 router = APIRouter()
 
-@router.get("/", response_model=List[schemas.Book])
+@router.get("/all", response_model=List[schemas.Book])
 async def get_all_book(*, db: Session = Depends(get_db), sort: schemas.BookSort):
     books = book_crud.get_multi(db)
     return books
 
-@router.get("/{id}", response_model=schemas.Book)
-async def get_book_by_id(*, db: Session = Depends(get_db), id: int):
-    book = book_crud.get(db,id=id)
+@router.get("/by_id", response_model=schemas.Book)
+async def get_book_by_id(*, db: Session = Depends(get_db), book_id: int):
+    book = book_crud.get(db,id=book_id)
     if not book:
         raise HTTPException(status_code=404, detail="book not found")
     
