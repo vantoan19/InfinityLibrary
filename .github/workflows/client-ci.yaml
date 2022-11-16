@@ -21,19 +21,25 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd client
+          npm ci
 
       - name: Check linting warnings and errors using ESLint
         run: |
           echo "Linting..."
+          cd client
           npm run lint
           echo "Linting ended!"
 
       - name: Execute client tests using Jest
         run: |
           echo "Executing client tests..."
+          cd client
           npm run test
           echo "Test executed!"
 
       - name: Build on EAS
-        run: eas build --platform all --non-interactive
+        run: |
+          cd client
+          eas build --platform all --non-interactive
