@@ -1,4 +1,4 @@
-name: Client CI (ESLint, Jest, Expo EAS build)
+name: Client CI (ESLint, Expo EAS build)
 
 on: [push]
 
@@ -31,13 +31,6 @@ jobs:
           cd client
           npm run lint
           echo "Linting ended!"
-
-      - name: Execute client tests using Jest
-        run: |
-          echo "Executing client tests..."
-          cd client
-          npm run test
-          echo "Test executed!"
 
       - name: Build on EAS
         run: |
