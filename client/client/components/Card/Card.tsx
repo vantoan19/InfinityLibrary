@@ -17,7 +17,7 @@ export default function Card({ gap, bookData }: Props) {
   const [displayBookData, setDisplayBookData] = useState(bookData)
 
   const navigatingToDetailsPage = () => {
-    const payloadObj: number = bookData.book_id
+    const payloadObj: number = bookData.id
     navigation.navigate("Details" as never, payloadObj as never)
   }
 
@@ -55,9 +55,7 @@ export default function Card({ gap, bookData }: Props) {
           </View>
           <View style={styles.priceCont}>
             <Text style={styles.priceText}>{displayBookData.price}</Text>
-            <Text style={styles.priceCur}>
-              {displayBookData.price_currency}
-            </Text>
+            <Text style={styles.priceCur}>$</Text>
           </View>
         </View>
       </View>

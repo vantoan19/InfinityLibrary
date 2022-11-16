@@ -80,10 +80,7 @@ export default function DetailsScreen({ navigation, route }: any) {
 
         <View style={styles.spacer}></View>
       </ScrollView>
-      <FixedContact
-        price={bookDetails?.price}
-        priceCurrency={bookDetails?.price_currency}
-      />
+      <FixedContact price={bookDetails?.price} priceCurrency="$" />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { ImageSourcePropType } from "react-native"
 
 export type User = {
-  user_id: number
+  id: number
   username: string
   avatar: ImageSourcePropType
   location: string
