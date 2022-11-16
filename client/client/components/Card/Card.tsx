@@ -26,10 +26,6 @@ export default function Card({ gap, bookData }: Props) {
     setDisplayBookData({ ...displayBookData, user: detailedUser })
   }, [])
 
-  useEffect(() => {
-    console.log("displayBookData", displayBookData)
-  }, [displayBookData])
-
   return (
     <Pressable
       onPress={navigatingToDetailsPage}
