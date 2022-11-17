@@ -30,7 +30,7 @@ class UserUpdate(UserBase):
 
 
 class User(UserBase):
-    id: int = Field(alias="user_id")
+    id: int
     address: list[Address]
     created_at: datetime
     modified_at: datetime | None
