@@ -27,9 +27,7 @@ class CRUDUser(CRUDBase[models.User, schemas.UserCreate, schemas.AddressUpdate])
             db.commit()
             db.refresh(user)
 
-            logging.info(
-                f"CRUDUser: End creating user with user_info={user_info}: Successful"
-            )
+            logging.info(f"CRUDUser: End creating user with user_info={user_info}: Successful")
             return user
         except SQLAlchemyError:
             logging.error(
