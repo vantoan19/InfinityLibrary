@@ -39,7 +39,7 @@ jobs:
 
       - name: Initialize db tables using Alembics
         run: |
-          sleep(5)
+          sleep 5
           echo "Initializing db tables..."
           docker compose exec server alembic upgrade head 
           echo "Finished init db!"
