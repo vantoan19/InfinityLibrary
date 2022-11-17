@@ -21,6 +21,7 @@ def upgrade() -> None:
     op.create_table(
         "users",
         sa.Column("id", sa.Integer(), primary_key=True),
+        sa.Column("username", sa.String(),nullable=False),
         sa.Column("account_type", sa.Enum(UserType), default=UserType.USER),
         sa.Column("phone_number", sa.String(), unique=True, index=True, nullable=False),
         sa.Column("email", sa.String, unique=True, nullable=False),

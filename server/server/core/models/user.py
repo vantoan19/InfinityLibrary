@@ -18,6 +18,7 @@ class User(Base):
     account_type = Column(Enum(UserType), default=UserType.USER)
     phone_number = Column(String, unique=True, index=True, nullable=False)
     email = Column(String, unique=True, nullable=True)
+    username = Column(String, nullable=False)
     password = Column(String, nullable=False)
     first_name = Column(String)
     last_name = Column(String)
