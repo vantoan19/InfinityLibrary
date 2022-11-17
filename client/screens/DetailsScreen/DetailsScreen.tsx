@@ -55,13 +55,10 @@ export default function DetailsScreen({ navigation, route }: any) {
   return (
     <>
       <ScrollView style={{ flexDirection: "column", backgroundColor: "white" }}>
-        <Image
-          style={styles.image}
-          source={bookDetails?.image_covers?.[0]}
-        ></Image>
+        <Image style={styles.image} source={bookDetails?.image_covers?.[0]} />
         <View style={styles.main}>
           <Text style={styles.titleTxt}>{bookDetails?.title}</Text>
-          <Text style={styles.postedTxt}>Posted 2 hours ago</Text>
+          <Text style={styles.postedTxt}>Posted 3 hours ago</Text>
           <GeneralInfos />
           <Text style={styles.descriptionTxt}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
@@ -78,7 +75,7 @@ export default function DetailsScreen({ navigation, route }: any) {
           {/* <Text>{JSON.stringify(bookDetails)}</Text> */}
         </View>
 
-        <View style={styles.spacer}></View>
+        <View style={styles.spacer} />
       </ScrollView>
       <FixedContact price={bookDetails?.price} priceCurrency="$" />
     </>
