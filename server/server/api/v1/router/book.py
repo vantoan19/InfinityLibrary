@@ -27,3 +27,18 @@ async def get_book_by_id(*, db: Session = Depends(get_db), book_id: int):
 async def create_book(*, db: Session = Depends(get_db), new_book: schemas.BookCreate):
     book = book_crud.create(db=db, book_info=new_book)
     return book
+
+
+# @router.delete("/", response_model=schemas.Book)
+# async def remove_book(*, db: Session = Depends(get_db), id: int):
+#     book = book_crud.remove(db, id=id)
+#     return book
+
+
+@router.put("/", response_model=schemas.Book)
+async def update_book(
+    *, db: Session = Depends(get_db), id: int, change_info: schemas.BookUpdate
+):
+    book = book_crud.get(db, id=id)
+    book = book_crud.update(db=db, db_obj=book, obj_in=change_info)
+    return book
