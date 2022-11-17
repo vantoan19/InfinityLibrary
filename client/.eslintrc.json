@@ -4,6 +4,14 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
     "prefer-const": "warn",
-    "react/self-closing-comp": "warn"
+    "react/self-closing-comp": "warn",
+    "react-native/no-inline-styles": "off",
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
