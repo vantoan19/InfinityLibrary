@@ -44,8 +44,8 @@ jobs:
           docker compose exec server alembic upgrade head 
           echo "Finished init db!"
 
-      - name: Run Pytest tests
+      - name: Run Pytest e2e tests
         id: run-server-tests
         run: |
           echo "Running tests..."
-          docker run ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest poetry run pytest --cov-config=.coveragerc --cov=server
+          docker compose exec server poetry run pytest --cov-config=.coveragerc --cov=server
