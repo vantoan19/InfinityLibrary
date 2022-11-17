@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.DEBUG, format="%(process)d-%(levelname)s-%(mes
 
 class CRUDBook(CRUDBase[models.Book, schemas.BookCreate, schemas.BookUpdate]):
     def create(self, db: Session, *, book_info: schemas.BookCreate) -> models.Book:
-
         logging.info(f"CRUDBook: Start creating book with book_info={book_info}")
         book_data = jsonable_encoder(book_info)
 
