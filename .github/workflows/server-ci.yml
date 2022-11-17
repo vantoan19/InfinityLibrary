@@ -29,7 +29,7 @@ jobs:
         id: build-image
         run: |
           echo "Starting server..."
-          docker compose up -d
+          docker compose up --build -d
           echo "Server docker image built successfully"
 
       - name: Check docker containers' existence
@@ -39,6 +39,7 @@ jobs:
 
       - name: Initialize db tables using Alembics
         run: |
+          sleep(5)
           echo "Initializing db tables..."
           docker compose exec server alembic upgrade head 
           echo "Finished init db!"
