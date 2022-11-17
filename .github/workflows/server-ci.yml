@@ -1,4 +1,4 @@
-name: Pylint
+name: Server CI (flake8, docker build, pytest)
 
 on: [push]
 
