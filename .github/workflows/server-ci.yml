@@ -32,6 +32,11 @@ jobs:
           docker compose up -d
           echo "Server docker image built successfully"
 
+      - name: Check docker containers' existence
+        run: |
+          echo "Listing containers..."
+          docker container ps
+
       - name: Initialize db tables using Alembics
         run: |
           echo "Initializing db tables..."
