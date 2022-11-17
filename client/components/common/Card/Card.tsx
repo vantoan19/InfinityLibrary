@@ -22,13 +22,13 @@ export default function Card({ gap, bookData }: Props) {
       onPress={navigatingToDetailsPage}
       style={[styles.container, { marginVertical: gap / 2 }]}
     >
-      <Image style={styles.imgCont} source={bookData.image_covers[0]}></Image>
+      <Image style={styles.imgCont} source={bookData.image_covers[0]} />
 
       <View style={styles.contentCont}>
         <Text style={styles.contentTitle}>{bookData.title}</Text>
         <View style={styles.innerContentCont}>
           <View style={styles.userCont}>
-            <Image style={styles.avatar} source={temp}></Image>
+            <Image style={styles.avatar} source={temp} />
             <View style={styles.userInfoCont}>
               <Text style={styles.usernameText}>username</Text>
               <Text style={styles.postedText}>Posted 1h ago</Text>
