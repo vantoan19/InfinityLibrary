@@ -15,7 +15,7 @@ class BookBase(BaseModel):
     pages: int | None = None
     price: int | None = None
 
-    status: BookStatus
+    status: BookStatus | None = None
 
 
 class BookSort(str, Enum):
