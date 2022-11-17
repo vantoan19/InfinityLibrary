@@ -59,7 +59,10 @@ To start the backend application using `docker-compose`
 ```bash
 docker compose up --build
 ```
-
+To stop the application, open new terminal and run command:
+```bash
+docker compose down
+```
 ### Production
 
 The application is separated into two parts: front-end is a cross-platform mobile application powered by React Native, back-end is a FastAPI server running in Docker and Kubernetes environment.
