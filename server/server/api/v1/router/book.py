@@ -29,10 +29,10 @@ async def create_book(*, db: Session = Depends(get_db), new_book: schemas.BookCr
     return book
 
 
-# @router.delete("/", response_model=schemas.Book)
-# async def remove_book(*, db: Session = Depends(get_db), id: int):
-#     book = book_crud.remove(db, id=id)
-#     return book
+@router.delete("/", response_model=schemas.Book)
+async def remove_book(*, db: Session = Depends(get_db), id: int):
+    book = book_crud.remove(db, id=id)
+    return book
 
 
 @router.put("/", response_model=schemas.Book)
