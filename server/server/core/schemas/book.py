@@ -20,10 +20,10 @@ class BookBase(BaseModel):
 
 class BookSort(str, Enum):
     default = "default"
-    price_asc = "price,asc"
-    price_desc = "price,desc"
-    timestamp_asc = "time,asc"
-    timestamp_desc = "time,desc"
+    price_asc = "price-asc"
+    price_desc = "price-desc"
+    timestamp_asc = "time-asc"
+    timestamp_desc = "time-desc"
     votes = "votes"
 
 
