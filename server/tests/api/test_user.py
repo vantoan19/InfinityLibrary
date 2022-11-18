@@ -57,6 +57,7 @@ class TestUserApi:
 
             assert user_response.status_code == 201
             assert user_info["phone_number"] == user_data["phone_number"]
+            assert user_info["username"] == user_data["username"]
             assert user_info["email"] == user_data["email"]
             assert user_info["first_name"] == user_data["first_name"]
             assert user_info["last_name"] == user_data["last_name"]
@@ -68,6 +69,7 @@ class TestUserApi:
         assert response.status_code == 200
         for user_info, user_data_from_response in zip(self.users_info, users_data_from_response):
             assert user_info["phone_number"] == user_data_from_response["phone_number"]
+            assert user_info["username"] == user_data_from_response["username"]
             assert user_info["email"] == user_data_from_response["email"]
             assert user_info["first_name"] == user_data_from_response["first_name"]
             assert user_info["last_name"] == user_data_from_response["last_name"]
@@ -82,6 +84,37 @@ class TestUserApi:
 
             assert response.status_code == 200
             assert user_data["phone_number"] == user_data_from_response["phone_number"]
+            assert user_data["username"] == user_data_from_response["username"]
             assert user_data["email"] == user_data_from_response["email"]
             assert user_data["first_name"] == user_data_from_response["first_name"]
             assert user_data["last_name"] == user_data_from_response["last_name"]
+
+    def test_create_user_fail_missing_username(self):
+        user_info = dict(self.users_info[0])
+        user_info.pop("username")
+        response = self.client.post("/api/v1/users/", json=user_info)
+        response_data = response.json()
+
+        assert response.status_code == 422
+        assert response_data["detail"][0]["msg"] == "field required"
+        assert response_data["detail"][0]["loc"] == ["body", "username"]
+
+    def test_create_user_fail_missing_phone_number(self):
+        user_info = dict(self.users_info[0])
+        user_info.pop("phone_number")
+        response = self.client.post("/api/v1/users/", json=user_info)
+        response_data = response.json()
+
+        assert response.status_code == 422
+        assert response_data["detail"][0]["msg"] == "field required"
+        assert response_data["detail"][0]["loc"] == ["body", "phone_number"]
+
+    def test_create_user_fail_missing_password(self):
+        user_info = dict(self.users_info[0])
+        user_info.pop("password")
+        response = self.client.post("/api/v1/users/", json=user_info)
+        response_data = response.json()
+
+        assert response.status_code == 422
+        assert response_data["detail"][0]["msg"] == "field required"
+        assert response_data["detail"][0]["loc"] == ["body", "password"]
