@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image } from "react-native"
-import Logo from "../../../assets/logo.svg"
-import test from "../../../assets/icon.png"
-import ChatBubbleSVG from "../../../assets/svg/chat-bubble.svg"
+import Logo from "../../assets/logo.svg"
+import test from "../../assets/icon.png"
+import ChatBubbleSVG from "../../assets/svg/chat-bubble.svg"
 
 export default function Header() {
   return (

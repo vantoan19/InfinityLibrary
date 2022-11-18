@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import placeholder from "../../../assets/placeholder.png"
-import temp from "../../../assets/icon.png"
+import temp from "../../assets/icon.png"
 import { useNavigation } from "@react-navigation/native"
-import { Book } from "../../../types/Book"
+import { Book } from "../../types/Book"
+import { MockUser } from "../../mocks/Users/Users"
+import { useEffect, useState } from "react"
 
 type Props = {
   gap: any
@@ -12,31 +14,42 @@ type Props = {
 export default function Card({ gap, bookData }: Props) {
   const navigation = useNavigation()
 
+  const [displayBookData, setDisplayBookData] = useState(bookData)
+
   const navigatingToDetailsPage = () => {
-    const payloadObj: Book = bookData
+    const payloadObj: number = bookData.id
     navigation.navigate("Details" as never, payloadObj as never)
   }
+
+  useEffect(() => {
+    const detailedUser = MockUser(bookData.user_id)
+    setDisplayBookData({ ...displayBookData, user: detailedUser })
+  }, [])
 
   return (
     <Pressable
       onPress={navigatingToDetailsPage}
       style={[styles.container, { marginVertical: gap / 2 }]}
     >
-      <Image style={styles.imgCont} source={bookData.image_covers[0]} />
+      <Image style={styles.imgCont} source={displayBookData.image_covers[0]} />
 
       <View style={styles.contentCont}>
-        <Text style={styles.contentTitle}>{bookData.title}</Text>
+        <Text style={styles.contentTitle}>{displayBookData.title}</Text>
         <View style={styles.innerContentCont}>
           <View style={styles.userCont}>
-            <Image style={styles.avatar} source={temp} />
+            <Image
+              style={styles.avatar}
+              source={displayBookData.user?.avatar || temp}
+            />
+
             <View style={styles.userInfoCont}>
               <Text style={styles.usernameText}>username</Text>
               <Text style={styles.postedText}>Posted 1h ago</Text>
             </View>
           </View>
           <View style={styles.priceCont}>
-            <Text style={styles.priceText}>{bookData.price}</Text>
-            <Text style={styles.priceCur}>{bookData.price_currency}</Text>
+            <Text style={styles.priceText}>{displayBookData.price}</Text>
+            <Text style={styles.priceCur}>$</Text>
           </View>
         </View>
       </View>

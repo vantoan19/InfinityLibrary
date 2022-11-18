@@ -2,7 +2,7 @@ import * as React from "react"
 import { Button, Text, View } from "react-native"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import HomeScreen from "./screens/HomeScreen"
+import HomeScreen from "./screens/HomeScreen/HomeScreen"
 import { useLayoutEffect } from "react"
 import { MotiView, AnimatePresence } from "moti"
 
