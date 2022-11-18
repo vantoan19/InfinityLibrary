@@ -36,9 +36,7 @@ async def remove_book(*, db: Session = Depends(get_db), id: int):
 
 
 @router.put("/", response_model=schemas.Book)
-async def update_book(
-    *, db: Session = Depends(get_db), id: int, change_info: schemas.BookUpdate
-):
+async def update_book(*, db: Session = Depends(get_db), id: int, change_info: schemas.BookUpdate):
     book = book_crud.get(db, id=id)
     book = book_crud.update(db=db, db_obj=book, obj_in=change_info)
     return book

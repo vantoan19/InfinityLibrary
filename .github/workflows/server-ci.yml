@@ -25,18 +25,27 @@ jobs:
           flake8 $(git ls-files '*.py')
           echo "Analyzed successfully with flake8!"
 
-      - name: Build server docker image
+      - name: Bring up the server using docker compose
         id: build-image
         run: |
-          echo "Building server image..."
-          cd server
-          docker image build \
-          --tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest \
-          .
+          echo "Starting server..."
+          docker compose up --build -d
           echo "Server docker image built successfully"
 
-      - name: Run Pytest tests
+      - name: Check docker containers' existence
+        run: |
+          echo "Listing containers..."
+          docker container ps
+
+      - name: Initialize db tables using Alembics
+        run: |
+          sleep 5
+          echo "Initializing db tables..."
+          docker compose exec server alembic upgrade head 
+          echo "Finished init db!"
+
+      - name: Run Pytest e2e tests
         id: run-server-tests
         run: |
           echo "Running tests..."
-          docker run ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest poetry run pytest --cov-config=.coveragerc --cov=server
+          docker compose exec server poetry run pytest --cov-config=.coveragerc --cov=server

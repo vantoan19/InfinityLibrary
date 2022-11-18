@@ -2,7 +2,7 @@ from fastapi import UploadFile
 from dataclasses import dataclass
 from pydantic import BaseModel
 from enum import Enum
-from typing import List
+from typing import List, Any
 from server.core.models import BookStatus
 from .user import User
 
@@ -20,10 +20,10 @@ class BookBase(BaseModel):
 
 class BookSort(str, Enum):
     default = "default"
-    price_asc = "price,asc"
-    price_desc = "price,desc"
-    timestamp_asc = "time,asc"
-    timestamp_desc = "time,desc"
+    price_asc = "price-asc"
+    price_desc = "price-desc"
+    timestamp_asc = "time-asc"
+    timestamp_desc = "time-desc"
     votes = "votes"
 
 
@@ -33,9 +33,17 @@ class Book(BookBase):
     title: str
     description: str
     published_year: int
-    user: User
+    location: str = "Budapest, Hungary"
     book_condition: str = "Newly open"
-    view: int = 0
+    views: int = 52
+    image_covers: List[Any] = [
+        {
+            "uri": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"  # noqa: E501
+        },
+        {
+            "uri": "https://images.unsplash.com/photo-1495640388908-05fa85288e61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"  # noqa: E501
+        },
+    ]
 
     class Config:
         orm_mode = True

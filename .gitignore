@@ -26,3 +26,4 @@ access_key
 secret_access_key
 service-account.json
 google-map-api-key
+pyproject.toml

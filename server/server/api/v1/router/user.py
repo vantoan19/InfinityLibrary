@@ -1,6 +1,6 @@
 from typing import Any, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from server.api import get_db
 from server.core import schemas
 from server.crud import user_crud
@@ -23,7 +23,7 @@ def read_users(*, db: Session = Depends(get_db), skip: int = 0, limit: int = 100
     return users
 
 
-@router.post("/", response_model=schemas.User)
+@router.post("/", response_model=schemas.User, status_code=status.HTTP_201_CREATED)
 def create_user(*, db: Session = Depends(get_db), user_info: schemas.UserCreate):
     user = user_crud.create(db=db, user_info=user_info)
     return user

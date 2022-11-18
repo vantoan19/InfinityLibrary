@@ -34,17 +34,13 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             logging.info(f"{type(self).__name__}: End query with id={id}: Successful")
             return obj
         except SQLAlchemyError:
-            logging.error(
-                f"{type(self).__name__}: End query with id={id}: Error", exc_info=True
-            )
+            logging.error(f"{type(self).__name__}: End query with id={id}: Error", exc_info=True)
             raise HTTPException(
                 status_code=500,
                 detail=f"{type(self).__name__}: Error when getting {type(ModelType).__name__}",
             )
 
-    def get_multi(
-        self, db: Session, *, skip: int = 0, limit: int = 1000000
-    ) -> List[ModelType]:
+    def get_multi(self, db: Session, *, skip: int = 0, limit: int = 1000000) -> List[ModelType]:
         logging.info(f"{type(self).__name__}: Start multiple query")
 
         try:
@@ -53,9 +49,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             logging.info(f"{type(self).__name__}: End multiple query: Successful")
             return objs
         except SQLAlchemyError:
-            logging.error(
-                f"{type(self).__name__}: End multiple query: Error", exc_info=True
-            )
+            logging.error(f"{type(self).__name__}: End multiple query: Error", exc_info=True)
             raise HTTPException(
                 status_code=500,
                 detail=f"{type(self).__name__}: Error when getting multiple instances of {type(ModelType).__name__}",
@@ -71,9 +65,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db.commit()
             db.refresh(db_obj)
 
-            logging.info(
-                f"{type(self).__name__}: End creating with schema{obj_in}: Successful"
-            )
+            logging.info(f"{type(self).__name__}: End creating with schema{obj_in}: Successful")
             return db_obj
         except SQLAlchemyError:
             logging.error(
@@ -110,9 +102,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db.commit()
             db.refresh(db_obj)
 
-            logging.info(
-                f"{type(self).__name__}: End updating with schema={obj_in}: Successful"
-            )
+            logging.info(f"{type(self).__name__}: End updating with schema={obj_in}: Successful")
             return db_obj
         except SQLAlchemyError:
             logging.error(
@@ -140,9 +130,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             logging.info(f"{type(self).__name__}: End removing id={id}: Successful")
             return obj
         except SQLAlchemyError:
-            logging.error(
-                f"{type(self).__name__}: End removing id={id}: Error", exc_info=True
-            )
+            logging.error(f"{type(self).__name__}: End removing id={id}: Error", exc_info=True)
             raise HTTPException(
                 status_code=500,
                 detail=f"{type(self).__name__}: Error when removing {type(ModelType).__name__}",

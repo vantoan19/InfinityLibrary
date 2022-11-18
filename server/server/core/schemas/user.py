@@ -9,6 +9,7 @@ from .address import Address, AddressCreate, AddressUpdate
 class UserBase(BaseModel):
     account_type: UserType | None = None
     phone_number: str | None = None
+    username: str | None = None
     email: str | None = None
     password: str | None = None
     first_name: str | None = None
@@ -19,6 +20,7 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     account_type: UserType = UserType.USER
     phone_number: str
+    username: str
     password: str
     first_name: str
     last_name: str
@@ -30,7 +32,7 @@ class UserUpdate(UserBase):
 
 
 class User(UserBase):
-    id: int = Field(alias="user_id")
+    id: int
     address: list[Address]
     created_at: datetime
     modified_at: datetime | None
