@@ -12,9 +12,9 @@ class VoteType(enum.Enum):
 class Vote(Base):
     __tablename__ = "votes"
 
-    vote_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     vote_type = Column(Enum(VoteType), nullable=False)
-    from_user = Column(Integer, ForeignKey("users.user_id"))
-    to_user = Column(Integer, ForeignKey("users.user_id"))
+    from_user = Column(Integer, ForeignKey("users.id"))
+    to_user = Column(Integer, ForeignKey("users.id"))
     points = Column(Integer, nullable=False)
     message = Column(String)
