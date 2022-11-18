@@ -63,6 +63,10 @@ To stop the application, open new terminal and run command:
 ```bash
 docker compose down
 ```
+To run tests
+```
+pytest
+```
 ### Production
 
 The application is separated into two parts: front-end is a cross-platform mobile application powered by React Native, back-end is a FastAPI server running in Docker and Kubernetes environment.
@@ -78,7 +82,8 @@ Because frontend always needs the latest version of APIs, therefore, backend sho
 
 Intermediate steps (building docker images, connecting to AWS EKS, run tests, checking linting errors...) are done by Github Actions
 
-To able to check APIs documentation (OpenAPI), please visit: http://abc28df83c5de4705a8dfeaa7da711e3-a5dbeee08a54aed1.elb.eu-central-1.amazonaws.com/api/v1/docs
+To able to check APIs documentation (OpenAPI), please visit: http://34.118.65.73/api/v1/docs
+Exposed IP: http://34.118.65.73/
 
 ## License
 
