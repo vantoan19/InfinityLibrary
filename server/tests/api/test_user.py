@@ -5,13 +5,13 @@ from operator import itemgetter
 
 
 class TestUserApi:
-
     client = TestClient(app)
 
     users_info = [
         {
             "account_type": "USER",
             "phone_number": "+36105474523",
+            "username": "user1",
             "email": "test@email.com",
             "password": "testpassword@a..",
             "first_name": "John",
@@ -31,6 +31,7 @@ class TestUserApi:
         {
             "account_type": "ADMIN",
             "phone_number": "+36205474523",
+            "username": "user2",
             "email": "admin@email.com",
             "password": "testpassword@a..",
             "first_name": "Admin",
@@ -62,14 +63,10 @@ class TestUserApi:
 
     def test_get_multi_users_success(self):
         response = self.client.get("/api/v1/users/")
-        users_data_from_response = sorted(
-            response.json(), key=itemgetter("phone_number")
-        )
+        users_data_from_response = sorted(response.json(), key=itemgetter("phone_number"))
 
         assert response.status_code == 200
-        for user_info, user_data_from_response in zip(
-            self.users_info, users_data_from_response
-        ):
+        for user_info, user_data_from_response in zip(self.users_info, users_data_from_response):
             assert user_info["phone_number"] == user_data_from_response["phone_number"]
             assert user_info["email"] == user_data_from_response["email"]
             assert user_info["first_name"] == user_data_from_response["first_name"]
@@ -77,14 +74,10 @@ class TestUserApi:
 
     def test_get_user_success(self):
         response = self.client.get("/api/v1/users/")
-        users_data_from_response = sorted(
-            response.json(), key=itemgetter("phone_number")
-        )
+        users_data_from_response = sorted(response.json(), key=itemgetter("phone_number"))
 
         for user_data_from_response in users_data_from_response:
-            response = self.client.get(
-                f'/api/v1/users/{user_data_from_response["user_id"]}'
-            )
+            response = self.client.get(f'/api/v1/users/{user_data_from_response["id"]}')
             user_data = response.json()
 
             assert response.status_code == 200
