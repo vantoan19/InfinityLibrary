@@ -14,7 +14,7 @@ import TextField from "../../components/TextField/TextField"
 import { ArrowLongLeftIcon } from "react-native-heroicons/solid"
 import { PhotoIcon } from "react-native-heroicons/outline"
 
-export default function CreateScreen({ navigation }) {
+export default function CreateScreen({ navigation }: any) {
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState(null)
   const [currency, setCurrency] = useState("")

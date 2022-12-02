@@ -15,6 +15,7 @@ import SellerInformation from "./SellerInfomation"
 import { MockDetailsBook } from "../../mocks/Books/Books"
 import { MockUser } from "../../mocks/Users/Users"
 import { User } from "../../types/User"
+import { ArrowLongLeftIcon } from "react-native-heroicons/solid"
 export default function DetailsScreen({ navigation, route }: any) {
   const bookID: number = route.params
 
@@ -56,6 +57,12 @@ export default function DetailsScreen({ navigation, route }: any) {
     <>
       <ScrollView style={{ flexDirection: "column", backgroundColor: "white" }}>
         <Image style={styles.image} source={bookDetails?.image_covers?.[0]} />
+        <ArrowLongLeftIcon
+          color="white"
+          size={40}
+          style={{ position: "absolute", left: 20, top: 20 }}
+          onPress={() => navigation.navigate("Home")}
+        />
         <View style={styles.main}>
           <Text style={styles.titleTxt}>{bookDetails?.title}</Text>
           <Text style={styles.postedTxt}>Posted 3 hours ago</Text>

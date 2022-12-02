@@ -52,7 +52,7 @@ export default function HomeScreen(props: any) {
       <Body navigation={props.navigation}>
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
           {bookData.map((e, ind) => (
-            <Card key={ind} bookData={e} gap={gap}></Card>
+            <Card key={ind} bookData={e} gap={gap} />
           ))}
         </View>
         <Text style={styles.text}>HomeScreen</Text>
