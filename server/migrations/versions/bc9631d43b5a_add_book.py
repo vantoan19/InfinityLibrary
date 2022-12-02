@@ -20,7 +20,7 @@ def upgrade() -> None:
     op.create_table(
         "books",
         sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("owner", sa.Integer(), sa.ForeignKey("users.id")),
+        sa.Column("user_id", sa.Integer(), sa.ForeignKey("users.id")),
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("description", sa.String()),
         sa.Column("published_year", sa.Integer(), nullable=False),
@@ -47,7 +47,7 @@ def upgrade() -> None:
         "book_user_fk",
         source_table="books",
         referent_table="users",
-        local_cols=["owner"],
+        local_cols=["user_id"],
         remote_cols=["id"],
         onupdate="CASCADE",
         ondelete="CASCADE",
@@ -80,8 +80,8 @@ def downgrade() -> None:
     op.drop_constraint("book_user_fk", table_name="books")
     op.drop_constraint("book_category_book_fk", table_name="book_categories")
     op.drop_constraint("book_category_category_fk", table_name="book_categories")
-    op.drop_table("books")
-    op.drop_table("categories")
     op.drop_table("book_categories")
-    sa.Enum("AVAILABLE", "OCCUPIED", "DELETED", name="BookStatus").drop(op.get_bind())
+    op.drop_table("categories")
+    op.drop_table("books")
+    sa.Enum("AVAILABLE", "OCCUPIED", "DELETED", name="bookstatus").drop(op.get_bind())
     pass
