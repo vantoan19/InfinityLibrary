@@ -1,6 +1,12 @@
 name: Server CI (flake8, docker build, pytest)
 
-on: [push]
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
 
 jobs:
   build:
