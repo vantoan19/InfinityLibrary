@@ -36,7 +36,9 @@ export default function SellerInformation({ user }: Props) {
             <Text style={styles.username}>{user?.username}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <LocationSVG color={"#1D1D1D"} width={12} height={12} />
-              <Text style={styles.location}>{user?.location}</Text>
+              <Text style={styles.location}>
+                {user?.address[0].city}, {user?.address[0].country}
+              </Text>
             </View>
           </View>
         </View>

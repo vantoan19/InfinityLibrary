@@ -9,6 +9,12 @@ export const MockUsers: User[] = [
     avatar: tempAva1,
     location: "Budapest,Hungary",
     rated: 4,
+    address: [
+      {
+        city: "Budapest",
+        country: "Hungary",
+      },
+    ],
   },
   {
     id: 2,
@@ -16,6 +22,12 @@ export const MockUsers: User[] = [
     avatar: tempAva2,
     location: "Budapest,Hungary",
     rated: 3,
+    address: [
+      {
+        city: "Budapest",
+        country: "Hungary",
+      },
+    ],
   },
 ]
 

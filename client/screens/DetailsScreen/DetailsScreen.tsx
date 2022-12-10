@@ -16,6 +16,7 @@ import { MockDetailsBook } from "../../mocks/Books/Books"
 import { MockUser } from "../../mocks/Users/Users"
 import { User } from "../../types/User"
 import { ArrowLongLeftIcon } from "react-native-heroicons/solid"
+import { LOCALHOST } from "../../env"
 export default function DetailsScreen({ navigation, route }: any) {
   const bookID: number = route.params
 
@@ -28,6 +29,30 @@ export default function DetailsScreen({ navigation, route }: any) {
     })
   })
 
+  //   API FETCHING
+  useEffect(() => {
+    const fetchBook = async () => {
+      const req = await fetch(
+        `${LOCALHOST}/api/v1/books/by_id?book_id=${bookID}`
+      )
+      const res = await req.json()
+
+      //const res = MockDetailsBook(bookID) as BookDetails
+      const userID = res.user_id
+      //const user = MockUser(userID)
+      const reqUser = await fetch(`${LOCALHOST}/api/v1/users/${userID}`)
+      const resUser = await reqUser.json()
+      const user = resUser
+
+      const finalObj = { ...res, user }
+
+      setBookDetails(finalObj)
+    }
+    fetchBook()
+  }, [])
+
+  /*
+  //   MOCK FETCHING
   //TODO: For fetching data base on bookDetails.
   useEffect(() => {
     const fetchBook = async () => {
@@ -52,6 +77,7 @@ export default function DetailsScreen({ navigation, route }: any) {
     }
     fetchUser()
   }, [bookDetails])
+  */
 
   return (
     <>
@@ -79,7 +105,7 @@ export default function DetailsScreen({ navigation, route }: any) {
             Exercitationem eos quos quaerat qui deserunt?
           </Text>
           <SellerInformation user={bookDetails.user as any} />
-          {/* <Text>{JSON.stringify(bookDetails)}</Text> */}
+          <Text>{JSON.stringify(bookDetails.user)}</Text>
         </View>
 
         <View style={styles.spacer} />
