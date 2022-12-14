@@ -25,7 +25,6 @@ export default function HomeScreen(props: any) {
     })
   })
 
-  /*
   //API FETCHING
   useEffect(() => {
     const fetching = async () => {
@@ -36,15 +35,16 @@ export default function HomeScreen(props: any) {
     }
     fetching()
   }, [])
-  */
 
   //MOCK FETCHING
+  /*
   useEffect(() => {
     const fetching = async () => {
       setBookData(Mock_BooksData)
     }
     fetching()
   }, [])
+  */
 
   return (
     <Layout>

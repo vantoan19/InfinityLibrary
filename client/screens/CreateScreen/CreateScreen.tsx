@@ -13,6 +13,7 @@ import Body from "../../components/Layout/Body"
 import TextField from "../../components/TextField/TextField"
 import { ArrowLongLeftIcon } from "react-native-heroicons/solid"
 import { PhotoIcon } from "react-native-heroicons/outline"
+import { LOCALHOST } from "../../env"
 
 export default function CreateScreen({ navigation }: any) {
   const [title, setTitle] = useState("")
@@ -27,6 +28,35 @@ export default function CreateScreen({ navigation }: any) {
   })
 
   const navigatingToHomePage = () => {
+    //API FETCHING
+    const fetching = async () => {
+      const bodyData = {
+        title,
+        description,
+        published_year: 0,
+        author: "Unknown",
+        pages: 0,
+        price,
+        status: "AVAILABLE",
+        book_category: ["string"],
+        user_id: 1,
+      }
+
+      const req = await fetch(`${LOCALHOST}/api/v1/books/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(bodyData),
+      })
+      const res = await req.json()
+
+      console.log("resCreate", res)
+    }
+    fetching()
+
+    //Navigating to home screen
     navigation.navigate("Home")
   }
 
