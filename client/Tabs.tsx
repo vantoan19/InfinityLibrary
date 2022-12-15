@@ -15,6 +15,7 @@ import {
 } from "react-native-heroicons/solid"
 import { useScrollBottomNavContext } from "./context/ScrollBottomNavContext"
 import CreateScreen from "./screens/CreateScreen/CreateScreen"
+import ProfileScreen from "./screens/ProfileScreen/ProfileScreen"
 
 function SettingsScreen({ navigation }: any) {
   return (
@@ -78,7 +79,7 @@ export default function Tabs() {
       />
       <Tab.Screen
         name="Profile"
-        component={SettingsScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <UserIcon size={20} color={color} />
