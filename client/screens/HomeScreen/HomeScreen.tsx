@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useEffect, useLayoutEffect, useState } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { StyleSheet, Text, View, StatusBar } from "react-native"
+import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native"
 import Layout from "../../components/Layout/Layout"
 import Header from "../../components/Layout/Header"
 import Body from "../../components/Layout/Body"
@@ -56,6 +56,13 @@ export default function HomeScreen(props: any) {
           ))}
         </View>
         <Text style={styles.text}>HomeScreen</Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Login" as never)
+          }}
+        >
+          <Text style={styles.text}>LoginScreen</Text>
+        </Pressable>
       </Body>
     </Layout>
   )
