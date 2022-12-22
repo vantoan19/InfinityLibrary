@@ -7,7 +7,7 @@ on:
       - completed
   push:
     branches:
-      - main
+      - "*"
 
 env:
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
@@ -24,6 +24,7 @@ jobs:
       - name: Install Gcloud
         run: |
           curl https://sdk.cloud.google.com | bash > /dev/null;
+          echo 'export USE_GKE_GCLOUD_AUTH_PLUGIN=True' >> $HOME/google-cloud-sdk/path.bash.inc
           source $HOME/google-cloud-sdk/path.bash.inc
           gcloud components update kubectl
 
