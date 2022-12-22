@@ -1,6 +1,10 @@
 name: Build, push server image into Docker Hub and deploy server into GKE
 
 on:
+  workflow_run:
+    workflows: [Server CI (flake8, docker build, pytest)]
+    types:
+      - completed
   push:
     branches:
       - main

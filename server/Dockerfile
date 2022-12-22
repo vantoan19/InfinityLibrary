@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.10.8-alpine
 
 ENV PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
