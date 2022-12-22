@@ -24,8 +24,8 @@ export default function LoginScreen({ navigation }: any) {
   })
 
   const loginSubmit = () => {
-    login("test")
-    navigate.navigate("Home" as never)
+    const isLogin = login(JSON.stringify({ email, password }))
+    if (isLogin) navigate.navigate("Home" as never)
   }
   return (
     <Layout>

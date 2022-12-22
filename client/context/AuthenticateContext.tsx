@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
 } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import MockAccount from "../mocks/Account/Account"
 
 type AuthenticateProviderProps = {
   children: ReactNode
@@ -14,7 +15,7 @@ type AuthenticateProviderProps = {
 type AuthenticateContext = {
   isAuthenticate?: boolean
   setIsAuthenticate: React.Dispatch<React.SetStateAction<boolean | undefined>>
-  login: (payload: any) => void
+  login: (payload: any) => boolean
   logout: () => void
 }
 
@@ -41,8 +42,12 @@ export function AuthenticateProvider({ children }: AuthenticateProviderProps) {
   }, [])
 
   const login = (payload: any) => {
-    AsyncStorage.setItem("user", payload)
-    setIsAuthenticate(true)
+    if (payload === JSON.stringify(MockAccount)) {
+      AsyncStorage.setItem("user", payload)
+      setIsAuthenticate(true)
+      return true
+    }
+    return false
   }
 
   const logout = () => {
