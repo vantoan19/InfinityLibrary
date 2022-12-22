@@ -2,12 +2,12 @@ name: Client CD (Expo EAS build)
 
 on:
   workflow_run:
-    workflows: [Client CI (ESLint, Expo EAS build)]
+    workflows: ["Client CI (ESLint, Expo EAS build)"]
     types:
       - completed
   push:
     branches:
-      - "*"
+      - main
 
 jobs:
   build:
