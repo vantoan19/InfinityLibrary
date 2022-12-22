@@ -27,3 +27,4 @@ secret_access_key
 service-account.json
 google-map-api-key
 pyproject.toml
+expo_sv_ac.json
