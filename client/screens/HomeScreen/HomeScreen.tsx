@@ -9,6 +9,8 @@ import { MotiView, AnimatePresence } from "moti"
 import Card from "../../components/Card/Card"
 import { Books as Mock_BooksData } from "../../mocks/Books/Books"
 import { LOCALHOST } from "../../env"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useAuthenticateContext } from "../../context/AuthenticateContext"
 
 const gap = 20
 
@@ -19,6 +21,8 @@ const gap = 20
 export default function HomeScreen(props: any) {
   const navigation = useNavigation()
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
+  const { isAuthenticate, setIsAuthenticate, logout } = useAuthenticateContext()
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -62,6 +66,14 @@ export default function HomeScreen(props: any) {
           }}
         >
           <Text style={styles.text}>LoginScreen</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            logout()
+            navigation.navigate("Login" as never)
+          }}
+        >
+          <Text style={styles.text}>Logout</Text>
         </Pressable>
       </Body>
     </Layout>

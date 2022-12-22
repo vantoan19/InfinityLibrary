@@ -8,15 +8,25 @@ import Divider from "./Divider"
 
 import GoogleIcon from "../../assets/svg/googleicon.svg"
 import FacebookIcon from "../../assets/svg/facebookicon.svg"
+import { useAuthenticateContext } from "../../context/AuthenticateContext"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useNavigation } from "@react-navigation/native"
 
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const navigate = useNavigation()
+  const { isAuthenticate, setIsAuthenticate, login } = useAuthenticateContext()
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     })
   })
+
+  const loginSubmit = () => {
+    login("test")
+    navigate.navigate("Home" as never)
+  }
   return (
     <Layout>
       <Image source={art} style={styles.art} />
@@ -46,7 +56,7 @@ export default function LoginScreen({ navigation }: any) {
         >
           <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </View>
-        <Pressable style={styles.btnLogin}>
+        <Pressable style={styles.btnLogin} onPress={loginSubmit}>
           <Text style={{ color: "white", fontWeight: "700" }}>Login</Text>
         </Pressable>
         <Divider />
