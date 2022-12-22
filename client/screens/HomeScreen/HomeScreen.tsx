@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useEffect, useLayoutEffect, useState } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { StyleSheet, Text, View, StatusBar } from "react-native"
+import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native"
 import Layout from "../../components/Layout/Layout"
 import Header from "../../components/Layout/Header"
 import Body from "../../components/Layout/Body"
@@ -9,6 +9,8 @@ import { MotiView, AnimatePresence } from "moti"
 import Card from "../../components/Card/Card"
 import { Books as Mock_BooksData } from "../../mocks/Books/Books"
 import { LOCALHOST } from "../../env"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useAuthenticateContext } from "../../context/AuthenticateContext"
 
 const gap = 20
 
@@ -19,6 +21,8 @@ const gap = 20
 export default function HomeScreen(props: any) {
   const navigation = useNavigation()
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
+  const { isAuthenticate, setIsAuthenticate, logout } = useAuthenticateContext()
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -56,6 +60,21 @@ export default function HomeScreen(props: any) {
           ))}
         </View>
         <Text style={styles.text}>HomeScreen</Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Login" as never)
+          }}
+        >
+          <Text style={styles.text}>LoginScreen</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            logout()
+            navigation.navigate("Login" as never)
+          }}
+        >
+          <Text style={styles.text}>Logout</Text>
+        </Pressable>
       </Body>
     </Layout>
   )

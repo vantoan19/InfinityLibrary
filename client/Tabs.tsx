@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useEffect } from "react"
 import { Button, Text, View } from "react-native"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -16,6 +16,7 @@ import {
 import { useScrollBottomNavContext } from "./context/ScrollBottomNavContext"
 import CreateScreen from "./screens/CreateScreen/CreateScreen"
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen"
+import { useAuthenticateContext } from "./context/AuthenticateContext"
 
 function SettingsScreen({ navigation }: any) {
   return (
@@ -32,7 +33,13 @@ function SettingsScreen({ navigation }: any) {
 const Tab = createBottomTabNavigator()
 
 export default function Tabs() {
+  const { isAuthenticate } = useAuthenticateContext()
   const navigation = useNavigation()
+
+  useEffect(() => {
+    if (isAuthenticate === false) navigation.navigate("Login" as never)
+  }, [isAuthenticate])
+
   const { scrollHide } = useScrollBottomNavContext()
   useLayoutEffect(() => {
     navigation.setOptions({
