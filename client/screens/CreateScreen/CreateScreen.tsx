@@ -64,18 +64,17 @@ export default function CreateScreen({ navigation }: any) {
     <Layout>
       <Body>
         {/* Header */}
-        <Pressable style={styles.header} onPress={navigatingToHomePage}>
-          <ArrowLongLeftIcon color="#1D1D1D" size={33} />
-          <View style={styles.postBtn}>
+        <View style={styles.header}>
+          <Pressable onPress={() => navigation.navigate("Home")}>
+            <ArrowLongLeftIcon color="#1D1D1D" size={33} />
+          </Pressable>
+          <Pressable style={styles.postBtn} onPress={navigatingToHomePage}>
             <Text style={styles.txtPostBtn}>Post</Text>
-          </View>
-        </Pressable>
+          </Pressable>
+        </View>
         <Text style={styles.title}>List a new Book</Text>
         <View style={styles.addImage}>
-          <Pressable
-            style={styles.iconImageCont}
-            onPress={navigatingToHomePage}
-          >
+          <Pressable style={styles.iconImageCont} onPress={() => {}}>
             <PhotoIcon color="#CBCACA" size={28} />
             <Text style={{ color: "#CBCACA" }}>Add images</Text>
           </Pressable>
