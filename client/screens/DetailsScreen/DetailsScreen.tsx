@@ -35,7 +35,14 @@ export default function DetailsScreen({ navigation, route }: any) {
       const req = await fetch(
         `${LOCALHOST}/api/v1/books/by_id?book_id=${bookID}`
       )
-      const res = await req.json()
+      let res = await req.json()
+
+      //Fetch MOCK instead
+      console.log("resss", res)
+      if (res.detail === "book not found") {
+        res = MockDetailsBook(bookID)
+        console.log("bookD", res)
+      }
 
       //const res = MockDetailsBook(bookID) as BookDetails
       const userID = res.user_id
