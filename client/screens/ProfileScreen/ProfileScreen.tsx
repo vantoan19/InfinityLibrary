@@ -1,7 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from "react"
 import { Pressable, View, Text, StyleSheet, Image } from "react-native"
 import { PencilIcon } from "react-native-heroicons/outline"
-import { ArrowLongLeftIcon } from "react-native-heroicons/solid"
+import {
+  ArrowLongLeftIcon,
+  ArrowRightOnRectangleIcon,
+} from "react-native-heroicons/solid"
 import Body from "../../components/Layout/Body"
 import Layout from "../../components/Layout/Layout"
 import profileBG from "../../assets/profileBG.png"
@@ -10,11 +13,15 @@ import MockVoteSVG from "../../assets/votes.svg"
 import Card from "../../components/Card/Card"
 
 import { Books as Mock_BooksData } from "../../mocks/Books/Books"
+import { useAuthenticateContext } from "../../context/AuthenticateContext"
+import { useNavigation } from "@react-navigation/native"
 
 const gap = 20
 
 export default function ProfileScreen({ navigation }: any) {
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
+  const { logout } = useAuthenticateContext()
+  const navigate = useNavigation()
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -44,9 +51,16 @@ export default function ProfileScreen({ navigation }: any) {
           <Pressable onPress={navigatingToHomePage}>
             <ArrowLongLeftIcon color="#1D1D1D" size={33} />
           </Pressable>
-          <View style={styles.editBtn}>
-            <PencilIcon color="white" size={15} />
-          </View>
+          <Pressable
+            onPress={() => {
+              logout()
+              navigate.navigate("Login" as never)
+            }}
+          >
+            <View style={styles.editBtn}>
+              <ArrowRightOnRectangleIcon color="white" size={22} />
+            </View>
+          </Pressable>
         </View>
         {/* CARD */}
         <View style={styles.cardProfileCont}>
