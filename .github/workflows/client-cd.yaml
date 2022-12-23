@@ -57,6 +57,7 @@ jobs:
       - name: Parse Asset URL
         id: androidUrl
         run: |
+          cd client
           ASSET_URL=$(cat buildLogAndroid.txt | tail | egrep -o 'https?://expo\.dev/artifacts/[^ ]+')
           echo The android url is $ASSET_URL
           echo "::set-output name=assetUrl::$ASSET_URL"
