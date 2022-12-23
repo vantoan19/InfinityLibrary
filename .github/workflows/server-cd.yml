@@ -7,7 +7,7 @@ on:
       - completed
   push:
     branches:
-      - main
+      - "*"
 
 env:
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
