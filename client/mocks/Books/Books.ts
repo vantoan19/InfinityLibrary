@@ -6,7 +6,7 @@ import book3 from "./book3.jpg"
 import book4 from "./book4.jpg"
 export const Books: Book[] = [
   {
-    id: 1,
+    id: -1,
     title: "Book1",
     image_covers: [book1],
     price: 20,
@@ -15,7 +15,7 @@ export const Books: Book[] = [
     user_id: 1,
   },
   {
-    id: 2,
+    id: -2,
     title: "Book2",
     image_covers: [
       {
@@ -25,10 +25,10 @@ export const Books: Book[] = [
     price: 30,
 
     posted: "1h ago",
-    user_id: 2,
+    user_id: 1,
   },
   {
-    id: 3,
+    id: -3,
     title: "Book3",
     image_covers: [book3],
     price: 10,
@@ -37,13 +37,13 @@ export const Books: Book[] = [
     user_id: 1,
   },
   {
-    id: 4,
+    id: -4,
     title: "Book4",
     image_covers: [book4],
     price: 120,
 
     posted: "1h ago",
-    user_id: 2,
+    user_id: 1,
   },
 ]
 
