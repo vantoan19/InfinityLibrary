@@ -23,7 +23,6 @@ const gap = 20
 export default function HomeScreen(props: any) {
   const navigation = useNavigation()
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
-  const { isAuthenticate, setIsAuthenticate, logout } = useAuthenticateContext()
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -63,22 +62,6 @@ export default function HomeScreen(props: any) {
             <Card key={ind} bookData={e} gap={gap} />
           ))}
         </View>
-        <Text style={styles.text}>HomeScreen</Text>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("Login" as never)
-          }}
-        >
-          <Text style={styles.text}>LoginScreen</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            logout()
-            navigation.navigate("Login" as never)
-          }}
-        >
-          <Text style={styles.text}>Logout</Text>
-        </Pressable>
       </Body>
     </Layout>
   )
