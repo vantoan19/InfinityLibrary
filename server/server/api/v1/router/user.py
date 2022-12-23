@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/{id}", response_model=schemas.ModifiedUser)
 def read_user(*, db: Session = Depends(get_db), id: int) -> Any:
-    user = modify_user(user_crud.get(db=db, id=id))
+    user = modify_user(user_crud.get(db=db, id=id), db)
     if not user:
         raise HTTPException(status_code=404, detail="user not found")
     return user

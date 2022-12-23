@@ -30,7 +30,7 @@ def get_votes_from(*, db: Session = Depends(get_db), user_id: int):
 
 
 @router.get("/votes/to", response_model=list[schemas.Vote])
-def get_votes_from(*, db: Session = Depends(get_db), user_id: int):
+def get_votes_to(*, db: Session = Depends(get_db), user_id: int):
     is_user = lambda x: x.to_user == user_id
     votes = votes = vote_crud.get_multi(db=db)
     votes = list(filter(is_user, votes))
