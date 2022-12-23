@@ -28,9 +28,13 @@ jobs:
           curl https://sdk.cloud.google.com | bash > /dev/null;
           source $HOME/google-cloud-sdk/path.bash.inc
           gcloud components install gke-gcloud-auth-plugin
+          gke-gcloud-auth-plugin --version 
+          gcloud components update
           gcloud components update kubectl
 
       - name: Authenticate to Google Cloud and set cluster information
+        env:
+          USE_GKE_GCLOUD_AUTH_PLUGIN: True
         run: |
           echo ${{ secrets.SERVICE_ACCOUNT }} | base64 --decode > service-account.json
           gcloud auth activate-service-account --key-file service-account.json
