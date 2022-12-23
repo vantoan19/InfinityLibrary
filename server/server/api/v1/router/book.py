@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 @router.get("/all", response_model=List[schemas.Book])
-async def get_all_book(*, db: Session = Depends(get_db), sort: schemas.BookSort):
+async def get_all_book(*, db: Session = Depends(get_db)):
     books = book_crud.get_multi(db)
     return books
 
