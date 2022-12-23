@@ -36,6 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: rlespinasse/github-slug-action@v2.x
       - uses: actions/setup-node@v2
         with:
           node-version: 16.x
@@ -68,5 +69,5 @@ jobs:
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
           file: ./example-${{ env.GITHUB_REF_SLUG }}.apk
-          asset_name: example-${{ env.GITHUB_REF_SLUG }}.apk
+          asset_name: release-${{ env.GITHUB_REF_SLUG }}.apk
           tag: ${{ github.ref }}
