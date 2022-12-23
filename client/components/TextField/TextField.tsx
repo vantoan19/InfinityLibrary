@@ -4,7 +4,13 @@ export default function TextField(props: any) {
   return (
     <TextInput
       {...props}
-      style={[styles.textField, { width: props.width || "100%" }]}
+      style={[
+        styles.textField,
+        {
+          width: props.width || "100%",
+          borderColor: props.borderColor || "#CBCACA",
+        },
+      ]}
     />
   )
 }
@@ -12,7 +18,6 @@ export default function TextField(props: any) {
 const styles = StyleSheet.create({
   textField: {
     borderWidth: 1,
-    borderColor: "#CBCACA",
     borderRadius: 10,
     padding: 10,
   },

@@ -11,6 +11,7 @@ import { Books as Mock_BooksData } from "../../mocks/Books/Books"
 import { LOCALHOST } from "../../env"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useAuthenticateContext } from "../../context/AuthenticateContext"
+import SearchBox from "./SearchBox"
 
 const gap = 20
 
@@ -54,6 +55,7 @@ export default function HomeScreen(props: any) {
     <Layout>
       <Header />
       <Body navigation={props.navigation}>
+        <SearchBox />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
           {bookData.map((e, ind) => (
             <Card key={ind} bookData={e} gap={gap} />
