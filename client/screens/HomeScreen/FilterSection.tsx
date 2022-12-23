@@ -2,21 +2,22 @@ import { useState } from "react"
 import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native"
 import { AdjustmentsHorizontalIcon } from "react-native-heroicons/solid"
 
-export default function FilterSection() {
-  const [activeIndex, setActiveIndex] = useState(1)
-
+export default function FilterSection({
+  activeFilter,
+  setActiveFilterCB,
+}: any) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <Pressable
           onPress={() => {
-            setActiveIndex(1)
+            setActiveFilterCB(1)
           }}
         >
           <Text
             style={[
               styles.option,
-              { color: activeIndex === 1 ? "#1D1D1D" : "#BEBEBE" },
+              { color: activeFilter === 1 ? "#1D1D1D" : "#BEBEBE" },
             ]}
           >
             Recommend
@@ -24,13 +25,13 @@ export default function FilterSection() {
         </Pressable>
         <Pressable
           onPress={() => {
-            setActiveIndex(2)
+            setActiveFilterCB(2)
           }}
         >
           <Text
             style={[
               styles.option,
-              { color: activeIndex === 2 ? "#1D1D1D" : "#BEBEBE" },
+              { color: activeFilter === 2 ? "#1D1D1D" : "#BEBEBE" },
             ]}
           >
             Newest
@@ -38,13 +39,13 @@ export default function FilterSection() {
         </Pressable>
         <Pressable
           onPress={() => {
-            setActiveIndex(3)
+            setActiveFilterCB(3)
           }}
         >
           <Text
             style={[
               styles.option,
-              { color: activeIndex === 3 ? "#1D1D1D" : "#BEBEBE" },
+              { color: activeFilter === 3 ? "#1D1D1D" : "#BEBEBE" },
             ]}
           >
             Popular

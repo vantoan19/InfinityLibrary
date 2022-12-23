@@ -23,6 +23,7 @@ const gap = 20
 export default function HomeScreen(props: any) {
   const navigation = useNavigation()
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
+  const [activeFilter, setActiveFilter] = useState(1)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,14 +33,30 @@ export default function HomeScreen(props: any) {
 
   //API FETCHING
   useEffect(() => {
+    const convertFilter = () => {
+      switch (activeFilter) {
+        case 1:
+          return "default"
+        case 2:
+          return "time-desc"
+        case 3:
+          return "votes"
+        default:
+          return "default"
+      }
+    }
+
     const fetching = async () => {
-      const req = await fetch(`${LOCALHOST}/api/v1/books/all?sort=default`)
+      const filterQueryType = convertFilter()
+      const req = await fetch(
+        `${LOCALHOST}/api/v1/books/all?sort=${filterQueryType}`
+      )
       const res = await req.json()
       console.log("res", res)
       setBookData(res)
     }
     fetching()
-  }, [])
+  }, [activeFilter])
 
   //MOCK FETCHING
   /*
@@ -56,7 +73,10 @@ export default function HomeScreen(props: any) {
       <Header />
       <Body navigation={props.navigation}>
         <SearchBox />
-        <FilterSection />
+        <FilterSection
+          activeFilter={activeFilter}
+          setActiveFilterCB={setActiveFilter}
+        />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
           {bookData.map((e, ind) => (
             <Card key={ind} bookData={e} gap={gap} />
