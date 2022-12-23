@@ -49,7 +49,6 @@ class Book(Base):
     pages = Column(Integer)
     status = Column(Enum(BookStatus), default=BookStatus.AVAILABLE)
     price = Column(Integer)
-
-    # cover_images = relationship("Book_cover_image", back_populates="book")
+    book_image_url = Column(String)
     user = relationship("User", back_populates="books")
     book_category = relationship("Book_category", back_populates="book")

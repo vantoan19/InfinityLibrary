@@ -21,7 +21,7 @@ def read_modified_user(*, db: Session = Depends(get_db), id: int) -> Any:
 @router.get("/modified", response_model=List[schemas.ModifiedUser])
 def read_modified_users(*, db: Session = Depends(get_db), skip: int = 0, limit: int = 10000000):
     users = user_crud.get_multi(db=db, skip=skip, limit=limit)
-    users = list(map(modify_user, users))
+    users = [modify_user(user_crud.get(db=db, id=user.id), db) for user in users]
     return users
 
 

@@ -85,6 +85,7 @@ export default function HomeScreen(props: any) {
             <Card key={ind} bookData={e} gap={gap} />
           ))}
         </View>
+        <View style={styles.spacer} />
       </Body>
     </Layout>
   )
@@ -100,5 +101,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexWrap: "wrap",
     gap: 10,
+  },
+  spacer: {
+    height: 120,
   },
 })
