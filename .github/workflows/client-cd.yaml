@@ -25,9 +25,6 @@ jobs:
       - name: Creating Release
         uses: ncipollo/release-action@v1
         with:
-          body: |
-            Changes in this Release: 
-            ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GH_TOKEN }}
           name: Release ${{ env.GITHUB_REF_SLUG }}
           allowUpdates: true
