@@ -22,6 +22,7 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), primary_key=True),
         sa.Column("user_id", sa.Integer(), sa.ForeignKey("users.id")),
         sa.Column("title", sa.String(), nullable=False),
+        sa.Column("book_image_url", sa.String()),
         sa.Column("description", sa.String()),
         sa.Column("published_year", sa.Integer(), nullable=False),
         sa.Column("author", sa.String(100), default="Unknown"),

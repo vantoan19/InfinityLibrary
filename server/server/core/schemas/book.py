@@ -27,6 +27,10 @@ class BookSort(str, Enum):
     votes = "votes"
 
 
+class BookCover(BaseModel):
+    uri: str
+
+
 class Book(BookBase):
     id: int
     user_id: int
@@ -35,15 +39,8 @@ class Book(BookBase):
     published_year: int
     location: str = "Budapest, Hungary"
     book_condition: str = "Newly open"
+    image_covers: list[BookCover]
     views: int = 52
-    image_covers: List[Any] = [
-        {
-            "uri": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"  # noqa: E501
-        },
-        {
-            "uri": "https://images.unsplash.com/photo-1495640388908-05fa85288e61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"  # noqa: E501
-        },
-    ]
 
     class Config:
         orm_mode = True
@@ -58,6 +55,7 @@ class BookCreate(BookBase):
     pages: int
     status: BookStatus = BookStatus.AVAILABLE
     book_category: List[str]
+    book_image_url: str
     user_id: int
 
 
