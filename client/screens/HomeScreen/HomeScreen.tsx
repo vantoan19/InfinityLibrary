@@ -11,6 +11,8 @@ import { Books as Mock_BooksData } from "../../mocks/Books/Books"
 import { LOCALHOST } from "../../env"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useAuthenticateContext } from "../../context/AuthenticateContext"
+import SearchBox from "./SearchBox"
+import FilterSection from "./FilterSection"
 
 const gap = 20
 
@@ -21,7 +23,7 @@ const gap = 20
 export default function HomeScreen(props: any) {
   const navigation = useNavigation()
   const [bookData, setBookData] = useState<typeof Mock_BooksData>([])
-  const { isAuthenticate, setIsAuthenticate, logout } = useAuthenticateContext()
+  const [activeFilter, setActiveFilter] = useState(1)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,14 +33,30 @@ export default function HomeScreen(props: any) {
 
   //API FETCHING
   useEffect(() => {
+    const convertFilter = () => {
+      switch (activeFilter) {
+        case 1:
+          return "default"
+        case 2:
+          return "time-desc"
+        case 3:
+          return "votes"
+        default:
+          return "default"
+      }
+    }
+
     const fetching = async () => {
-      const req = await fetch(`${LOCALHOST}/api/v1/books/all?sort=default`)
+      const filterQueryType = convertFilter()
+      const req = await fetch(
+        `${LOCALHOST}/api/v1/books/all?sort=${filterQueryType}`
+      )
       const res = await req.json()
       console.log("res", res)
       setBookData(res)
     }
     fetching()
-  }, [])
+  }, [activeFilter])
 
   //MOCK FETCHING
   /*
@@ -54,27 +72,19 @@ export default function HomeScreen(props: any) {
     <Layout>
       <Header />
       <Body navigation={props.navigation}>
+        <SearchBox />
+        <FilterSection
+          activeFilter={activeFilter}
+          setActiveFilterCB={setActiveFilter}
+        />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
+          {Mock_BooksData.map((e, ind) => (
+            <Card key={ind} bookData={e} gap={gap} />
+          ))}
           {bookData.map((e, ind) => (
             <Card key={ind} bookData={e} gap={gap} />
           ))}
         </View>
-        <Text style={styles.text}>HomeScreen</Text>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("Login" as never)
-          }}
-        >
-          <Text style={styles.text}>LoginScreen</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            logout()
-            navigation.navigate("Login" as never)
-          }}
-        >
-          <Text style={styles.text}>Logout</Text>
-        </Pressable>
       </Body>
     </Layout>
   )
