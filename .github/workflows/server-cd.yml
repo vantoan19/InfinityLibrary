@@ -36,10 +36,11 @@ jobs:
 
       - name: Install kubectl and gke-gcloud-auth-plugin
         run: |
-          gcloud components update kubectl
-          kubectl version
+          source $HOME/google-cloud-sdk/path.bash.inc
           gcloud components install gke-gcloud-auth-plugin
           gke-gcloud-auth-plugin --version
+          gcloud components update kubectl
+          kubectl version
           kubectl get pods
 
       - name: Login to Docker
