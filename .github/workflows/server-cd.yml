@@ -25,7 +25,6 @@ jobs:
         run: |
           curl https://sdk.cloud.google.com | bash > /dev/null;
           source $HOME/google-cloud-sdk/path.bash.inc
-          gcloud components update kubectl
 
       - name: Authenticate to Google Cloud and set cluster information
         run: |
@@ -34,6 +33,15 @@ jobs:
           gcloud config set project ${{ secrets.GKE_PROJECT }}
           gcloud config set compute/zone ${{ secrets.GKE_ZONE }}
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }}
+
+      - name: Install kubectl and gke-gcloud-auth-plugin
+        run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
+          gcloud components install gke-gcloud-auth-plugin
+          gke-gcloud-auth-plugin --version
+          gcloud components update kubectl
+          kubectl version
+          kubectl get pods
 
       - name: Login to Docker
         run: |
@@ -63,12 +71,15 @@ jobs:
 
       - name: Terminate old deployments and services
         run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
           kubectl delete all --all
 
       - name: Deploy
         run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
           kubectl apply -f kubernetes
 
       - name: verify deployment
         run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
           kubectl rollout status deployment/server-deployment
