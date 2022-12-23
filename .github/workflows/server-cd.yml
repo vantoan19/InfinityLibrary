@@ -81,4 +81,5 @@ jobs:
 
       - name: verify deployment
         run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
           kubectl rollout status deployment/server-deployment
