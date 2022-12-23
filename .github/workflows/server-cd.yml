@@ -71,6 +71,8 @@ jobs:
 
       - name: Terminate old deployments and services
         run: |
+          source $HOME/google-cloud-sdk/path.bash.inc
+          gke-gcloud-auth-plugin --version
           kubectl delete all --all
 
       - name: Deploy
