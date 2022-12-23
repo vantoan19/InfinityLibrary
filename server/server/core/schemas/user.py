@@ -40,3 +40,19 @@ class User(UserBase):
     class Config:
         orm_mode = True
         allow_population_by_field_name = True
+
+
+class Avatar(BaseModel):
+    uri: str
+
+
+class ModifiedUser(BaseModel):
+    id: int
+    username: str
+    avatar: Avatar
+    location: str
+    rated: int
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True
