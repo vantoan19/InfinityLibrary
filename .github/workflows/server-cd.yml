@@ -22,10 +22,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Gcloud
+        env:
+          USE_GKE_GCLOUD_AUTH_PLUGIN: True
         run: |
           curl https://sdk.cloud.google.com | bash > /dev/null;
-          echo 'export USE_GKE_GCLOUD_AUTH_PLUGIN=True' >> $HOME/google-cloud-sdk/path.bash.inc
           source $HOME/google-cloud-sdk/path.bash.inc
+          gcloud components install gke-gcloud-auth-plugin
           gcloud components update kubectl
 
       - name: Authenticate to Google Cloud and set cluster information
