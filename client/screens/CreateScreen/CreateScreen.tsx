@@ -20,6 +20,7 @@ export default function CreateScreen({ navigation }: any) {
   const [price, setPrice] = useState(null)
   const [currency, setCurrency] = useState("")
   const [description, setDescription] = useState("")
+  const [imageURL, setImageURL] = useState("")
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,6 +40,7 @@ export default function CreateScreen({ navigation }: any) {
         price,
         status: "AVAILABLE",
         book_category: ["string"],
+        book_image_url: imageURL,
         user_id: 1,
       }
 
@@ -107,6 +109,14 @@ export default function CreateScreen({ navigation }: any) {
             placeholder="Description"
           />
         </View>
+        <View style={styles.inputWrapper}>
+          <TextField
+            onChangeText={setImageURL}
+            value={imageURL}
+            placeholder="ImageURL"
+          />
+        </View>
+        <View style={styles.spacer} />
       </Body>
     </Layout>
   )
@@ -166,5 +176,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  spacer: {
+    height: 120,
   },
 })
