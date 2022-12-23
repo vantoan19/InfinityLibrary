@@ -78,6 +78,9 @@ export default function HomeScreen(props: any) {
           setActiveFilterCB={setActiveFilter}
         />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
+          {Mock_BooksData.map((e, ind) => (
+            <Card key={ind} bookData={e} gap={gap} />
+          ))}
           {bookData.map((e, ind) => (
             <Card key={ind} bookData={e} gap={gap} />
           ))}

@@ -112,7 +112,7 @@ export default function DetailsScreen({ navigation, route }: any) {
             Exercitationem eos quos quaerat qui deserunt?
           </Text>
           <SellerInformation user={bookDetails.user as any} />
-          <Text>{JSON.stringify(bookDetails.user)}</Text>
+          {/* <Text>{JSON.stringify(bookDetails.user)}</Text> */}
         </View>
 
         <View style={styles.spacer} />
