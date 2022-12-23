@@ -25,12 +25,11 @@ jobs:
         env:
           USE_GKE_GCLOUD_AUTH_PLUGIN: True
         run: |
-          curl https://sdk.cloud.google.com | bash > /dev/null;
-          source $HOME/google-cloud-sdk/path.bash.inc
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+          sudo apt-get update && sudo apt-get install google-cloud-cli
           gcloud components install gke-gcloud-auth-plugin
-          gke-gcloud-auth-plugin --version 
-          gcloud components update
-          gcloud components update kubectl
+          gcloud components install kubectl
 
       - name: Authenticate to Google Cloud and set cluster information
         env:
@@ -41,6 +40,7 @@ jobs:
           gcloud config set project ${{ secrets.GKE_PROJECT }}
           gcloud config set compute/zone ${{ secrets.GKE_ZONE }}
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }}
+          kubectl get namespaces
 
       - name: Login to Docker
         run: |
