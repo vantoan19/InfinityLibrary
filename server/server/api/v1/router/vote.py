@@ -23,7 +23,7 @@ def create_post(*, db: Session = Depends(get_db), vote_info: schemas.VoteCreate)
 
 @router.get("/votes/from", response_model=list[schemas.Vote])
 def get_votes_from(*, db: Session = Depends(get_db), user_id: int):
-    is_user = lambda x: x.from_user == user_id
+    is_user = lambda x: x.from_user == user_id  # noqa: E731
     votes = votes = vote_crud.get_multi(db=db)
     votes = list(filter(is_user, votes))
     return votes
@@ -31,7 +31,7 @@ def get_votes_from(*, db: Session = Depends(get_db), user_id: int):
 
 @router.get("/votes/to", response_model=list[schemas.Vote])
 def get_votes_to(*, db: Session = Depends(get_db), user_id: int):
-    is_user = lambda x: x.to_user == user_id
+    is_user = lambda x: x.to_user == user_id  # noqa: E731
     votes = votes = vote_crud.get_multi(db=db)
     votes = list(filter(is_user, votes))
     return votes
