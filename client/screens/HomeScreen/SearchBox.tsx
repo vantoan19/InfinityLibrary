@@ -8,7 +8,7 @@ export default function SearchBox() {
 
   return (
     <View style={styles.container}>
-      <MagnifyingGlassIcon color={"#1D1D1D"} size="16" />
+      <MagnifyingGlassIcon color={"#4b4b4b"} size="15" />
       <TextField
         borderColor="transparent"
         onChangeText={setQuery}

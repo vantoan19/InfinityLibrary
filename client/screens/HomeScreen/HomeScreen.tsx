@@ -12,6 +12,7 @@ import { LOCALHOST } from "../../env"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useAuthenticateContext } from "../../context/AuthenticateContext"
 import SearchBox from "./SearchBox"
+import FilterSection from "./FilterSection"
 
 const gap = 20
 
@@ -56,6 +57,7 @@ export default function HomeScreen(props: any) {
       <Header />
       <Body navigation={props.navigation}>
         <SearchBox />
+        <FilterSection />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
           {bookData.map((e, ind) => (
             <Card key={ind} bookData={e} gap={gap} />
