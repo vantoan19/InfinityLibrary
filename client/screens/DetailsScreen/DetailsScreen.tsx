@@ -66,7 +66,7 @@ export default function DetailsScreen({ navigation, route }: any) {
         <ArrowLongLeftIcon
           color="white"
           size={40}
-          style={{ position: "absolute", left: 20, top: 20 }}
+          style={{ position: "absolute", left: 20, top: 40 }}
           onPress={() => navigation.navigate("Home")}
         />
         <View style={styles.main}>

@@ -7,7 +7,7 @@ import book4 from "./book4.jpg"
 export const Books: Book[] = [
   {
     id: -1,
-    title: "Book1",
+    title: "The Chronicles of Narnia",
     image_covers: [book1],
     price: 20,
 
@@ -16,7 +16,7 @@ export const Books: Book[] = [
   },
   {
     id: -2,
-    title: "Book2",
+    title: "The Psychology of Money",
     image_covers: [
       {
         uri: "https://images.unsplash.com/photo-1592496431122-2349e0fbc666?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1212&q=80",
@@ -29,7 +29,7 @@ export const Books: Book[] = [
   },
   {
     id: -3,
-    title: "Book3",
+    title: "Your Soul is a River",
     image_covers: [book3],
     price: 10,
 
@@ -38,7 +38,7 @@ export const Books: Book[] = [
   },
   {
     id: -4,
-    title: "Book4",
+    title: "Harry Potter and the Prisoner",
     image_covers: [book4],
     price: 120,
 
