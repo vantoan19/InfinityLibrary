@@ -8,11 +8,14 @@ import {
 import Body from "../../components/Layout/Body"
 import Layout from "../../components/Layout/Layout"
 import profileBG from "../../assets/profileBG.png"
-import avatar from "../../assets/placeholder.png"
+import avatar from "../../assets/ava1.png"
 import MockVoteSVG from "../../assets/votes.svg"
 import Card from "../../components/Card/Card"
 
-import { Books as Mock_BooksData } from "../../mocks/Books/Books"
+import {
+  Books as Mock_BooksData,
+  MockProfileBooks,
+} from "../../mocks/Books/Books"
 import { useAuthenticateContext } from "../../context/AuthenticateContext"
 import { useNavigation } from "@react-navigation/native"
 
@@ -38,7 +41,7 @@ export default function ProfileScreen({ navigation }: any) {
 
   useEffect(() => {
     const fetching = async () => {
-      setBookData(Mock_BooksData)
+      setBookData(MockProfileBooks(1) || [])
     }
     fetching()
   }, [])
@@ -94,7 +97,7 @@ export default function ProfileScreen({ navigation }: any) {
 
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
           {bookData.map((e, ind) => (
-            <Card key={ind} bookData={e} gap={gap} />
+            <Card key={e.id} bookData={e} gap={gap} />
           ))}
         </View>
 

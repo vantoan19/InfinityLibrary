@@ -43,7 +43,9 @@ export default function Card({ gap, bookData }: Props) {
             />
 
             <View style={styles.userInfoCont}>
-              <Text style={styles.usernameText}>username</Text>
+              <Text style={styles.usernameText}>
+                {displayBookData?.user?.username}
+              </Text>
               <Text style={styles.postedText}>Posted 1h ago</Text>
             </View>
           </View>
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     marginRight: 5,
+    borderRadius: 20,
   },
 
   userCont: {

@@ -29,6 +29,7 @@ export default function CreateScreen({ navigation }: any) {
   })
 
   const navigatingToHomePage = () => {
+    /*
     //API FETCHING
     const fetching = async () => {
       const bodyData = {
@@ -57,6 +58,7 @@ export default function CreateScreen({ navigation }: any) {
       console.log("resCreate", res)
     }
     fetching()
+    */
 
     //Navigating to home screen
     navigation.navigate("Home")

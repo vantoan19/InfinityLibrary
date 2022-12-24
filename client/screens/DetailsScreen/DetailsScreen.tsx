@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  StatusBar,
 } from "react-native"
 import { Book, BookDetails } from "../../types/Book"
 import FixedContact from "./FixedContact"
@@ -29,36 +30,6 @@ export default function DetailsScreen({ navigation, route }: any) {
     })
   })
 
-  //   API FETCHING
-  useEffect(() => {
-    const fetchBook = async () => {
-      const req = await fetch(
-        `${LOCALHOST}/api/v1/books/by_id?book_id=${bookID}`
-      )
-      let res = await req.json()
-
-      //Fetch MOCK instead
-      console.log("resss", res)
-      if (res.detail === "book not found") {
-        res = MockDetailsBook(bookID)
-        console.log("bookD", res)
-      }
-
-      //const res = MockDetailsBook(bookID) as BookDetails
-      const userID = res.user_id
-      //const user = MockUser(userID)
-      const reqUser = await fetch(`${LOCALHOST}/api/v1/users/${userID}`)
-      const resUser = await reqUser.json()
-      const user = resUser
-
-      const finalObj = { ...res, user }
-
-      setBookDetails(finalObj)
-    }
-    fetchBook()
-  }, [])
-
-  /*
   //   MOCK FETCHING
   //TODO: For fetching data base on bookDetails.
   useEffect(() => {
@@ -77,6 +48,7 @@ export default function DetailsScreen({ navigation, route }: any) {
     fetchBook()
   }, [])
 
+  /*
   useEffect(() => {
     const fetchUser = async () => {
       // const req = await fetch('../')
@@ -88,12 +60,13 @@ export default function DetailsScreen({ navigation, route }: any) {
 
   return (
     <>
+      <StatusBar backgroundColor={"transparent"} translucent />
       <ScrollView style={{ flexDirection: "column", backgroundColor: "white" }}>
         <Image style={styles.image} source={bookDetails?.image_covers?.[0]} />
         <ArrowLongLeftIcon
           color="white"
           size={40}
-          style={{ position: "absolute", left: 20, top: 20 }}
+          style={{ position: "absolute", left: 20, top: 40 }}
           onPress={() => navigation.navigate("Home")}
         />
         <View style={styles.main}>

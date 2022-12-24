@@ -1,13 +1,13 @@
 import { User } from "../../types/User"
-import tempAva1 from "../../assets/icon.png"
-import tempAva2 from "../../assets/placeholder.png"
+import tempAva1 from "../../assets/ava1.png"
+import tempAva2 from "../../assets/ava2.png"
 
 export const MockUsers: User[] = [
   {
     id: 1,
     username: "nhtoby",
     avatar: tempAva1,
-    location: "Budapest,Hungary",
+    location: "Budapest, Hungary",
     rated: 4,
     address: [
       {
@@ -18,13 +18,13 @@ export const MockUsers: User[] = [
   },
   {
     id: 2,
-    username: "nhtoby",
+    username: "amanda.jsz",
     avatar: tempAva2,
-    location: "Budapest,Hungary",
+    location: "Budapest, Hungary",
     rated: 3,
     address: [
       {
-        city: "Budapest",
+        city: "Pecs",
         country: "Hungary",
       },
     ],

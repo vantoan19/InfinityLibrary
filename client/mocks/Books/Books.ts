@@ -7,7 +7,7 @@ import book4 from "./book4.jpg"
 export const Books: Book[] = [
   {
     id: -1,
-    title: "Book1",
+    title: "The Chronicles of Narnia",
     image_covers: [book1],
     price: 20,
 
@@ -16,10 +16,10 @@ export const Books: Book[] = [
   },
   {
     id: -2,
-    title: "Book2",
+    title: "The Psychology of Money",
     image_covers: [
       {
-        uri: "https://images.unsplash.com/photo-1577627444534-b38e16c9d796?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80",
+        uri: "https://images.unsplash.com/photo-1592496431122-2349e0fbc666?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1212&q=80",
       },
     ],
     price: 30,
@@ -29,16 +29,16 @@ export const Books: Book[] = [
   },
   {
     id: -3,
-    title: "Book3",
+    title: "Your Soul is a River",
     image_covers: [book3],
     price: 10,
 
     posted: "1h ago",
-    user_id: 1,
+    user_id: 2,
   },
   {
     id: -4,
-    title: "Book4",
+    title: "Harry Potter and the Prisoner",
     image_covers: [book4],
     price: 120,
 
@@ -63,3 +63,20 @@ const findAndConstructBook = (
 export const MockDetailsBook: (id: number) => BookDetails | undefined = (
   id: number
 ) => findAndConstructBook(Books.find((e) => e.id === id))
+
+export const MockProfileBooks: (id: number) => Book[] | undefined = (
+  id: number
+) => Books.filter((e) => e.user_id === id)
+
+export const MockSortedBooks: (
+  type: "default" | "time-desc" | "votes"
+) => Book[] | undefined = (type) => {
+  switch (type) {
+    case "default":
+      return Books
+    case "time-desc":
+      return [Books[3], Books[2], Books[1], Books[0]]
+    default:
+      return [Books[1], Books[3], Books[2], Books[0]]
+  }
+}
