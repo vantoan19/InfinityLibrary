@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import Logo from "../../assets/logo.svg"
-import test from "../../assets/icon.png"
+import ava1 from "../../assets/ava1.png"
 import ChatBubbleSVG from "../../assets/svg/chat-bubble.svg"
 import { useNavigation } from "@react-navigation/native"
 
@@ -10,15 +10,21 @@ export default function Header() {
     <View style={styles.container}>
       <Logo />
       <View style={styles.innerCont}>
-        <View style={styles.avatar}>
-          <ChatBubbleSVG />
-        </View>
         <Pressable
           onPress={() => {
-            navigate.navigate("Profile" as never, {} as never)
+            navigate.navigate("Create" as never)
           }}
         >
-          <Image style={styles.avatar} source={test} />
+          <View style={styles.avatar}>
+            <ChatBubbleSVG />
+          </View>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigate.navigate("Profile" as never)
+          }}
+        >
+          <Image style={styles.avatar} source={ava1} />
         </Pressable>
       </View>
     </View>

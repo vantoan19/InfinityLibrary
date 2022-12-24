@@ -1,13 +1,15 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useEffect, useLayoutEffect, useState } from "react"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native"
 import Layout from "../../components/Layout/Layout"
 import Header from "../../components/Layout/Header"
 import Body from "../../components/Layout/Body"
 import { MotiView, AnimatePresence } from "moti"
 import Card from "../../components/Card/Card"
-import { Books as Mock_BooksData } from "../../mocks/Books/Books"
+import {
+  Books as Mock_BooksData,
+  MockSortedBooks,
+} from "../../mocks/Books/Books"
 import { LOCALHOST } from "../../env"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useAuthenticateContext } from "../../context/AuthenticateContext"
@@ -46,23 +48,14 @@ export default function HomeScreen(props: any) {
       }
     }
 
-    const fetching = async () => {
-      const filterQueryType = convertFilter()
-      const req = await fetch(
-        `${LOCALHOST}/api/v1/books/all?sort=${filterQueryType}`
-      )
-      const res = await req.json()
-      console.log("res", res)
-      setBookData(res)
-    }
-    fetching()
+    setBookData(MockSortedBooks(convertFilter()) || [])
   }, [activeFilter])
 
   //MOCK FETCHING
   /*
   useEffect(() => {
     const fetching = async () => {
-      setBookData(Mock_BooksData)
+      
     }
     fetching()
   }, [])
@@ -78,11 +71,8 @@ export default function HomeScreen(props: any) {
           setActiveFilterCB={setActiveFilter}
         />
         <View style={[styles.cardsCont, { paddingVertical: -1 * (gap / 2) }]}>
-          {Mock_BooksData.map((e, ind) => (
-            <Card key={ind} bookData={e} gap={gap} />
-          ))}
           {bookData.map((e, ind) => (
-            <Card key={ind} bookData={e} gap={gap} />
+            <Card key={e.id} bookData={e} gap={gap} />
           ))}
         </View>
         <View style={styles.spacer} />

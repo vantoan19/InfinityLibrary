@@ -74,7 +74,7 @@ export default function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Create"
         component={CreateScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
